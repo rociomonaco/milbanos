@@ -375,11 +375,21 @@ let getHTMLProducts = products.forEach(i => {
             inputQuantity.type = 'number';
             let addCartButton = d.createElement('button');
             addCartButton.className = 'agregar-carrito';
+            addCartButton.id = "agregarCarrito";
             addCartButton.innerHTML = 'Agregar al carrito';
-            addCartButton.addEventListener('click',()=>{
+            // addCartButton.addEventListener('click',()=>{
+            //     setProductsToCart(i);
+            //     addProductCart(i);
+            // }); 
+            $(addCartButton).click((i)=>{
                 setProductsToCart(i);
                 addProductCart(i);
-            }); 
+
+                ("#agregarCarrito").animate(
+                    {left: '250px'}, 1000, function(){
+                        console.log('termino animacion');
+                    });
+            });
 
         let boxDescription = d.createElement('div');
         boxDescription.className = 'box-descripcion';
@@ -440,7 +450,8 @@ let getHTMLProducts = products.forEach(i => {
     colorSelect.appendChild(colorOption3);
     optionsForm.appendChild(inputQuantity);
     optionsForm.appendChild(labelQuantity);
-    boxDetail.appendChild(addCartButton);
+    // boxDetail.appendChild(addCartButton);
+    (boxDetail).append(addCartButton);
     containerModal.appendChild(sectionModalProduct);
     sectionModalProduct.appendChild(boxDescription);
     boxDescription.appendChild(titleDescription);
@@ -499,9 +510,8 @@ function addProductCart(i){
     subtractProduct.innerHTML = '-';
     subtractProduct.addEventListener('click', function(){
         if(productQuantity.value > 1){
-            productQuantity.value--
-         
-            console.log(productQuantity);
+            productQuantity.value--; 
+        console.log(productQuantity);
 
         }
         subtractFunction(i);
@@ -588,18 +598,18 @@ console.log(ordenarMayorMenor);
 
 //COMPRAR PROBLEMAS con poner todo en el mismo script- porque a partir de que no encuentra el appendChild de la ul que aparece en STORE.html, no muestra mas nada. 
 
-let payCart = d.getElementById('comprar');
-let toPayCart = d.getElementById('loQuiero');
+// let payCart = d.getElementById('comprar');
+// let toPayCart = d.getElementById('loQuiero');
 
-toPayCart.addEventListener('click',function(){
-    location.href =  './comprar.html';
-    cart.forEach(i => {
+// toPayCart.addEventListener('click',function(){
+//     location.href =  './comprar.html';
+//     cart.forEach(i => {
 
-        let nameProductCart = d.createElement('p');
-        nameProductCart.innerHTML = i.nombre;
+//         let nameProductCart = d.createElement('p');
+//         nameProductCart.innerHTML = i.nombre;
 
 
-        payCart.appendChild(nameProductCart);
-    });
+//         payCart.appendChild(nameProductCart);
+//     });
 
-});
+// });
