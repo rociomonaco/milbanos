@@ -376,17 +376,17 @@ let getHTMLProducts = products.forEach(i => {
             addCartButton.className = 'agregar-carrito';
             addCartButton.id = "agregarCarrito";
             addCartButton.innerHTML = 'Agregar al carrito';
-            // addCartButton.addEventListener('click',()=>{
-            //     setProductsToCart(i);
-            //     addProductCart(i);
-            // }); 
-            $(addCartButton).click((i)=>{
+            addCartButton.addEventListener('click',()=>{
                 setProductsToCart(i);
                 addProductCart(i);
+            }); 
+            // $(addCartButton).click((i)=>{
+            //     setProductsToCart(i);
+            //     addProductCart(i);
 
-                $(addCartButton).animate({left: '250px'}, 1000)
-                                .animate({rigth: '-250px'}, 1500);
-            });
+            //     $(addCartButton).animate({left: '250px'}, 1000)
+            //                     .animate({rigth: '-250px'}, 1500);
+            // });
 
         let boxDescription = d.createElement('div');
         boxDescription.className = 'box-descripcion';
@@ -447,8 +447,8 @@ let getHTMLProducts = products.forEach(i => {
     colorSelect.appendChild(colorOption3);
     optionsForm.appendChild(inputQuantity);
     optionsForm.appendChild(labelQuantity);
-    // boxDetail.appendChild(addCartButton);
-    (boxDetail).append(addCartButton);
+    boxDetail.appendChild(addCartButton);
+    // (boxDetail).append(addCartButton);
     containerModal.appendChild(sectionModalProduct);
     sectionModalProduct.appendChild(boxDescription);
     boxDescription.appendChild(titleDescription);
@@ -466,7 +466,7 @@ productQuantity = d.createElement('input');
 productQuantity.value = 1;
 let totalPrice = d.getElementById('totalPrice');
 let removeCart = d.getElementById('removeCart');
-let productItem = d.createElement('li');
+
 // Se abre y se cierra el carrito de compras.
 iconCart.addEventListener('click', ()=> {
     cardCart.classList.toggle('activar');
@@ -474,9 +474,8 @@ iconCart.addEventListener('click', ()=> {
 // Item que se agrega al hacer click en agregar producto:
 
 function addProductCart(i){
-    if(productItem){
-        productQuantity.value++
-    }else{
+    
+    let productItem = d.createElement('li');
     productItem.classList.add('itemProductCart');
     productItem.id = 'product'+ i.id;
     
@@ -489,7 +488,6 @@ function addProductCart(i){
     
     
     productQuantity.type = 'number';
-    
     productQuantity.id = 'cantidad' + i.id;
     productQuantity.addEventListener('change',function(){changeQuantity(event)}); 
     
@@ -546,7 +544,7 @@ function addProductCart(i){
     productItem.appendChild(priceProduct);
     cartList.appendChild(productItem);
     
-    }
+    
    
     
 }
