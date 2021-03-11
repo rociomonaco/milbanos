@@ -242,7 +242,6 @@ let colorOption3;
 let colores;
 
 
-
 let getHTMLProducts = products.forEach(i => {
     storeItem = d.createElement('li');
     storeItem.className = 'producto-card';
@@ -385,10 +384,8 @@ let getHTMLProducts = products.forEach(i => {
                 setProductsToCart(i);
                 addProductCart(i);
 
-                ("#agregarCarrito").animate(
-                    {left: '250px'}, 1000, function(){
-                        console.log('termino animacion');
-                    });
+                $(addCartButton).animate({left: '250px'}, 1000)
+                                .animate({rigth: '-250px'}, 1500);
             });
 
         let boxDescription = d.createElement('div');
@@ -461,22 +458,25 @@ let getHTMLProducts = products.forEach(i => {
   
 });
 
-
 let iconCart = d.getElementById('iconCart');
 let cardCart = d.getElementById('cardCart');
 let cartList = d.getElementById('cartList');
 let productQuantity; 
+productQuantity = d.createElement('input');
+productQuantity.value = 1;
 let totalPrice = d.getElementById('totalPrice');
 let removeCart = d.getElementById('removeCart');
-
+let productItem = d.createElement('li');
 // Se abre y se cierra el carrito de compras.
 iconCart.addEventListener('click', ()=> {
     cardCart.classList.toggle('activar');
 });
 // Item que se agrega al hacer click en agregar producto:
-function addProductCart(i){
 
-    let productItem = d.createElement('li');
+function addProductCart(i){
+    if(productItem){
+        productQuantity.value++
+    }else{
     productItem.classList.add('itemProductCart');
     productItem.id = 'product'+ i.id;
     
@@ -487,9 +487,9 @@ function addProductCart(i){
     let productColor = d.createElement('p');
     // productColor.innerHTML = document.optionsForm.option
     
-    productQuantity = d.createElement('input');
+    
     productQuantity.type = 'number';
-    productQuantity.value = 1;
+    
     productQuantity.id = 'cantidad' + i.id;
     productQuantity.addEventListener('change',function(){changeQuantity(event)}); 
     
@@ -545,6 +545,9 @@ function addProductCart(i){
     productItem.appendChild(productColor);
     productItem.appendChild(priceProduct);
     cartList.appendChild(productItem);
+    
+    }
+   
     
 }
 // problemas con estos valores al actualizarlos y en el local storage..
