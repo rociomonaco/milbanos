@@ -376,17 +376,17 @@ let getHTMLProducts = products.forEach(i => {
             addCartButton.className = 'agregar-carrito';
             addCartButton.id = "agregarCarrito";
             addCartButton.innerHTML = 'Agregar al carrito';
-            addCartButton.addEventListener('click',()=>{
-                setProductsToCart(i);
-                addProductCart(i);
-            }); 
-            // $(addCartButton).click((i)=>{
+            // addCartButton.addEventListener('click',()=>{
             //     setProductsToCart(i);
             //     addProductCart(i);
+            // }); 
+            $(addCartButton).click((i)=>{
+                setProductsToCart(i);
+                addProductCart(i);
 
-            //     $(addCartButton).animate({left: '250px'}, 1000)
-            //                     .animate({rigth: '-250px'}, 1500);
-            // });
+                $(addCartButton).animate({left: '250px'}, 1000)
+                                .animate({rigth: '-250px'}, 1500);
+            });
 
         let boxDescription = d.createElement('div');
         boxDescription.className = 'box-descripcion';
@@ -447,8 +447,8 @@ let getHTMLProducts = products.forEach(i => {
     colorSelect.appendChild(colorOption3);
     optionsForm.appendChild(inputQuantity);
     optionsForm.appendChild(labelQuantity);
-    boxDetail.appendChild(addCartButton);
-    // (boxDetail).append(addCartButton);
+    // boxDetail.appendChild(addCartButton);
+    (boxDetail).append(addCartButton);
     containerModal.appendChild(sectionModalProduct);
     sectionModalProduct.appendChild(boxDescription);
     boxDescription.appendChild(titleDescription);
