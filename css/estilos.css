@@ -650,6 +650,9 @@ footer .copy-footer img{
 .box-detalle > button{
     margin: auto;
 }
+.box-detalle .agregar-carrito{
+    position:absolute;
+}
 .box-detalle .agregar-carrito:hover{
     background-color: #adbd99;
 
