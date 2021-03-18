@@ -188,15 +188,15 @@ const datos = `
 
 
 // const URLGET = "./data.json";
-// function getProductsList(){
-//     let productsParse = JSON.parse(datos);
-//     console.log(productsParse);
-//     let productsObject = productsParse.map((value)=>{
-//         return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-//         value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
-//     });
-//     return productsObject;   
-// }
+function getProductsList(){
+    let productsParse = JSON.parse(datos);
+    console.log(productsParse);
+    let productsObject = productsParse.map((value)=>{
+        return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+        value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+    });
+    return productsObject;   
+}
 
 
 /* -------------------------------------------------
@@ -229,6 +229,7 @@ function setProductsToCart(i){
 ----------------------------------------------------*/
 const d = document;
 let cart = [];
+let products = getProductsList();
 let storeList =  d.getElementById('store-list');
 let storeItem;
 let boxPriceSale;
@@ -244,16 +245,16 @@ let colores;
 
 // AJAX PROBLEMAS 
 // $(() => {$.getJSON(URLGET,(respuesta)=>{
-function getProductsList(){
-    let productsParse = JSON.parse(datos);
-    let productsObject = productsParse.map((value)=>{
-        return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-        value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
-        });
-        return productsObject;   
-    }
+// function getProductsList(){
+//     let productsParse = JSON.parse(datos);
+//     let productsObject = productsParse.map((value)=>{
+//         return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+//         value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+//         });
+//         return productsObject;   
+//     }
 
-let products = getProductsList();
+
 
     let getHTMLProducts = products.forEach(i => {
         storeItem = d.createElement('li');
