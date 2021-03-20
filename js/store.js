@@ -46,157 +46,156 @@ class Product{
 ----------- que se almacenan en otro array ---------
 ----------- a traves del metodo map ----------------
 ----------------------------------------------------*/
-const datos = `
-[
-    {
-        "nombre": "Almohadon LIMA ",
-        "id":  1,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/destacados-5.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["beige","verde","bordo"],
-        "conDecuento" : true
-    },
-    {
-        "nombre": "Almohadon PILAR ",
-        "id":  2,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/destacados-5.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["beige","terracota","gris oscuro"],
-        "conDecuento" : true
-    },
-    {
-        "nombre": "Almohadones CLEO PACKx2",
-        "id":  3,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/deco-opcion1.jpg", 
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",              
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["beige","rosa nude","azul marino"],
-        "conDecuento" : "false"
-    },
-    {
-        "nombre": "Almohadones KIA",
-        "id":  4,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/destacados-1.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",          
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["durazno","turquesa","negro", "lila"],
-        "conDecuento" : true
-    },
-    {
-        "nombre": "Almohadones CLEO PACKx2",
-        "id":  5,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/deco-opcion1.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["celeste","verde","violeta"],
-        "conDecuento" : true
-    },
-    {
-        "nombre": "Almohadones KIA",
-        "id":  6,
-        "categoria": "Mantas y almohadones",
-        "stock": 30,
-        "imagenPrincipal": "../img/destacados-1.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Almohadon confeccionado con telas de la India.",
-        "precio": 5900,
-        "descuento": 10,
-        "precioADescontar": 35613,
-        "colores": ["beige","verde","bordo"],
-        "conDecuento" : false
-    },
-    {
-        "nombre": "Silla Mila",
-        "id":  7,
-        "categoria": "Accesorios de living",
-        "stock": 15,
-        "imagenPrincipal": "../img/destacados-4.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Banco de descanso de madera, con tira de cuero",
-        "precio":10000,
-        "descuento": 5,
-        "precioADescontar": 9950,
-        "colores": ["beige","coral","marron"],
-        "conDecuento" : true
-    },
-    {
-        "nombre": "Silla Mila",
-        "id":  8,
-        "categoria": "Accesorios de living",
-        "stock": 15,
-        "imagenPrincipal": "../img/deco-living-6.jpg",
-        "itemImagen1":"../img/destacados-5.jpg",
-        "itemImagen2":"../img/almohadon-1.jpg",
-        "itemImagen3":"../img/almohadon-2.jpg",
-        "itemImagen4":"../img/almohadon-3.jpg",
-        "descripcion": "Banco de descanso de madera, con tira de cuero",
-        "precio":10000,
-        "descuento": 5,
-        "precioADescontar": 9950,
-        "colores": ["beige","verde","bordo"],
-        "conDecuento" : false
-    }
-]`;
+// const datos = `
+// [
+//     {
+//         "nombre": "Almohadon LIMA ",
+//         "id":  1,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/destacados-5.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["beige","verde","bordo"],
+//         "conDecuento" : true
+//     },
+//     {
+//         "nombre": "Almohadon PILAR ",
+//         "id":  2,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/destacados-5.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["beige","terracota","gris oscuro"],
+//         "conDecuento" : true
+//     },
+//     {
+//         "nombre": "Almohadones CLEO PACKx2",
+//         "id":  3,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/deco-opcion1.jpg", 
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",              
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["beige","rosa nude","azul marino"],
+//         "conDecuento" : "false"
+//     },
+//     {
+//         "nombre": "Almohadones KIA",
+//         "id":  4,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/destacados-1.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",          
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["durazno","turquesa","negro", "lila"],
+//         "conDecuento" : true
+//     },
+//     {
+//         "nombre": "Almohadones CLEO PACKx2",
+//         "id":  5,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/deco-opcion1.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["celeste","verde","violeta"],
+//         "conDecuento" : true
+//     },
+//     {
+//         "nombre": "Almohadones KIA",
+//         "id":  6,
+//         "categoria": "Mantas y almohadones",
+//         "stock": 30,
+//         "imagenPrincipal": "../img/destacados-1.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Almohadon confeccionado con telas de la India.",
+//         "precio": 5900,
+//         "descuento": 10,
+//         "precioADescontar": 35613,
+//         "colores": ["beige","verde","bordo"],
+//         "conDecuento" : false
+//     },
+//     {
+//         "nombre": "Silla Mila",
+//         "id":  7,
+//         "categoria": "Accesorios de living",
+//         "stock": 15,
+//         "imagenPrincipal": "../img/destacados-4.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Banco de descanso de madera, con tira de cuero",
+//         "precio":10000,
+//         "descuento": 5,
+//         "precioADescontar": 9950,
+//         "colores": ["beige","coral","marron"],
+//         "conDecuento" : true
+//     },
+//     {
+//         "nombre": "Silla Mila",
+//         "id":  8,
+//         "categoria": "Accesorios de living",
+//         "stock": 15,
+//         "imagenPrincipal": "../img/deco-living-6.jpg",
+//         "itemImagen1":"../img/destacados-5.jpg",
+//         "itemImagen2":"../img/almohadon-1.jpg",
+//         "itemImagen3":"../img/almohadon-2.jpg",
+//         "itemImagen4":"../img/almohadon-3.jpg",
+//         "descripcion": "Banco de descanso de madera, con tira de cuero",
+//         "precio":10000,
+//         "descuento": 5,
+//         "precioADescontar": 9950,
+//         "colores": ["beige","verde","bordo"],
+//         "conDecuento" : false
+//     }
+// ]`;
 
 
-// const URLGET = "./data.json";
-function getProductsList(){
-    let productsParse = JSON.parse(datos);
-    console.log(productsParse);
-    let productsObject = productsParse.map((value)=>{
-        return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-        value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
-    });
-    return productsObject;   
-}
+// function getProductsList(){
+//     let productsParse = JSON.parse(datos);
+//     console.log(productsParse);
+//     let productsObject = productsParse.map((value)=>{
+//         return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+//         value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+//     });
+//     return productsObject;   
+// }
 
 
 /* -------------------------------------------------
@@ -229,7 +228,7 @@ function setProductsToCart(i){
 ----------------------------------------------------*/
 const d = document;
 let cart = [];
-let products = getProductsList();
+
 let storeList =  d.getElementById('store-list');
 let storeItem;
 let boxPriceSale;
@@ -243,19 +242,22 @@ let colorOption3;
 let colores;
 
 
+//VER
+let products = getProductsList();
 // AJAX PROBLEMAS 
-// $(() => {$.getJSON(URLGET,(respuesta)=>{
-// function getProductsList(){
-//     let productsParse = JSON.parse(datos);
-//     let productsObject = productsParse.map((value)=>{
-//         return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-//         value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
-//         });
-//         return productsObject;   
-//     }
+const URLGET = "./data.json";
+$(() => {$.getJSON(URLGET,(respuesta)=>{
+    
+function getProductsList(){
+    let productsParse = JSON.parse(respuesta);
+    let productsObject = productsParse.map((value)=>{
+        return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+        value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+        });
+        return productsObject;   
+    }
 
-
-
+// getHTMLProducts FIGURA DE OTRO COLOR
     let getHTMLProducts = products.forEach(i => {
         storeItem = d.createElement('li');
         storeItem.className = 'producto-card';
@@ -389,20 +391,16 @@ let colores;
                 addCartButton.className = 'agregar-carrito';
                 addCartButton.id = "agregarCarrito" + i.id;
                 addCartButton.innerHTML = 'Agregar al carrito';
-                addCartButton.addEventListener('click',()=>{
+                $(".agregar-carrito").click((e)=>{
                     setProductsToCart(i);
                     addProductCart(i);
-                });
-                // $(".agregar-carrito").click((e)=>{
-                //     setProductsToCart(i);
-                //     addProductCart(i);
 
-                    // $(e.target).animate({color: 'black',
-                    //                     with: '200px'}, "slow", function(){
-                    //     console.log("final de animacion");
-                    // });
-                    // $(".agregar-carrito").css({ "color": "#000"});
-                // });
+                    $(e.target).animate({color: 'black',
+                                        width: '200px'}, "slow", function(){
+                        console.log("final de animacion");
+                    });
+                    $(".agregar-carrito").css({ "color": "#000"});
+                });
 
             let boxDescription = d.createElement('div');
             boxDescription.className = 'box-descripcion';
@@ -474,7 +472,7 @@ let colores;
         storeList.appendChild(storeItem);
     
     }); 
-// });
+});
 
 
 let iconCart = d.getElementById('iconCart');
@@ -518,7 +516,7 @@ function addProductCart(i){
         productQuantity.value++;
         console.log(productQuantity);
         setProductsToCart(i);
-        changeQuantity(event);
+        // changeQuantity(event);
         updateTotal(i);
     });
 
@@ -565,8 +563,11 @@ function addProductCart(i){
     cartList.appendChild(productItem);  
 }
 // problemas con estos valores al actualizarlos y en el local storage..
+
+
 function updateTotal(i){
-    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (productQuantity.value * i.precio));
+    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * parseInt(i.precio)));
+    
     return i.precio;
 }
 // problemas con estos valores al actualizarlos y en el local storage..
