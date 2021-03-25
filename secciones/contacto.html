@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/7c7d2d5fd7.js" crossorigin="anonymous"></script>
+        <script src="../js/contacto.js" defer></script>
         <link rel="stylesheet" href="../css/estilos.css">
         <title>Milbanos|Contacto</title>
     </head>
@@ -43,135 +44,24 @@
             </section>
             <section class="titulo-buscador">
                 <h1><a href="../index.html">MILBANOS</a></h1>
-                <!-- <div>
-                    <form action="#">
-                        <input type="text" name="search" placeholder="Buscá el producto que querés">
-                    </form>
-                </div> -->
             </section>
             <section>
                 <a class="open-menu" href="#menu"><i class="fas fa-bars"></i></a>
                 <nav class="navbar" id="menu">
                     <a class="close-menu" href="#"><i class="fas fa-times"></i></a>
                     <ul>
-                    
                         <li>
-                            <a href="./store.html">Deco-cocina</a>
-                            <ul class="ocultar">
-
-                                <div>
-                                        <li><a href="#">Decoración</a></li>
-                                        <li><a href="#">Exterior</a></li>
-                                        <li><a href="#">Bazar comedor</a></li>
-                                        <li><a href="#">Bazar cocina</a></li>
-                                        <li><a href="#">Baño</a></li>
-                                        <li><a href="#">Otras categorías</a></li>
-                                </div>
-                                <div>
-                                        <li><a href="#">Ambiente e iluminación</a></li>
-                                        <li><a href="#">Flores, floreros y macetas</a></li>
-                                        <li><a href="#">Mantas y almohadones</a></li>
-                                        <li><a href="#">Vajilla</a></li>
-                                        <li><a href="#">Accesorios para baño</a></li>
-                                        
-                                    </div>
-                                    <div>
-                                        <li><a href="#">Termos e infuciones</a></li>
-                                        <li><a href="#">Adornos</a></li>                           
-                                        <li><a href="#">Mantelería</a></li>
-                                        <li><a href="#">Accesorios de cocina</a></li>
-                                    </div>
-                                    
-        
-
-                            </ul>
+                            <a href="../index.html">Home</a>
+                        
                         </li>
                         <li>
-                            <a href="./store.html">Exteriores</a>
-                            <ul class="ocultar">
+                            <a href="store.html">Shop</a>
 
-                                <div>
-
-                                    <li><a href="#">Cuidado personal</a></li>
-                                    <li><a href="#">Aromatizadores</a></li>
-                                    <li><a href="#">Velas y fanales</a></li>
-
-                                </div>
-
-                            </ul>
-                    
-                        </li>
-                        <li>
-                            <a href="./store.html">Deco-baño</a>
-                            <ul class="ocultar">
-
-                                <div>
-
-                                    <li><a href="#">Cuidado personal</a></li>
-                                    <li><a href="#">Aromatizadores</a></li>
-                                    <li><a href="#">Velas y fanales</a></li>
-
-                                </div>
-
-                            </ul>
-                    
-                        </li>
-                        <li>
-                            <a href="./store.html">Deco-comedor</a>
-                            <ul class="ocultar">
-
-                                <div>
-
-                                    <li><a href="#">Cuidado personal</a></li>
-                                    <li><a href="#">Aromatizadores</a></li>
-                                    <li><a href="#">Velas y fanales</a></li>
-
-                                </div>
-
-                            </ul>
-                    
                         </li>
 
                         <li>
-                            <a href="./store.html">Ofertas</a>
-                            <ul class="ocultar">
-                                <div>
-
-                                    <li><a href="#">Escritura</a></li>
-                                    <li><a href="#">Hobbies y manualidades</a></li>
-                                    <li><a href="#">Regalos empresariales</a></li>
-
-                                </div>
-                                <div>
-
-                                    <li><a href="#">Tarjetas y envoltorios</a></li>
-                                    <li><a href="#">Accesorios</a></li>
-
-                                </div>
-                            </ul>
+                            <a href="contacto.html">Contacto</a>
                         </li>
-                        <li>
-                            <a href="./store.html">Otras categorías</a>
-                            <ul class="ocultar">
-                                <div>
-
-                                    <li><a href="#">Escritura</a></li>
-                                    <li><a href="#">Hobbies y manualidades</a></li>
-                                    <li><a href="#">Regalos empresariales</a></li>
-
-                                </div>
-                                <div>
-
-                                    <li><a href="#">Tarjetas y envoltorios</a></li>
-                                    <li><a href="#">Accesorios</a></li>
-
-                                </div>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="./store.html">Ver Todo</a>
-                        </li>
-                    
                     </ul>
                 </nav>
             </section>
@@ -204,7 +94,7 @@
 
                         <textarea name="comments" cols="30" rows="10" id="comentarios" placeholder="Escribe tus comentarios"
                         title="Tu comentario no debe exceder los 255 caracteres." data-pattern="^.{1,255}$" required></textarea>
-                        <input type="submit" name="send">
+                        <input type="submit" id="sendForm" name="send">
                 </form>
                 
                 <div class="list-contact">

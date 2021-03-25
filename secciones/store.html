@@ -50,7 +50,7 @@
             <h1><a href="../index.html">MILBANOS</a></h1>
             <div>
                 <form action="#">
-                    <input type="text" name="search" placeholder="Buscá el producto que querés">
+                    <input type="text" class="card-filter" name="search" placeholder="Buscá el producto que querés">
                    
                 </form>
             </div>
@@ -61,121 +61,21 @@
                 <a class="close-menu" href="#"><i class="fas fa-times"></i></a>
                 <ul>
                     <li>
-                        <a href="">Deco-cocina</a>
-                        <ul class="ocultar">
+                        <a href="../index.html">Home</a>
+                    
+                    </li>
+                    <li>
+                        <a href="./store.html">Shop</a>
+                
+                
+                    </li>
 
-                              <div>
-                                    <li><a href="#">Decoración</a></li>
-                                    <li><a href="#">Exterior</a></li>
-                                    <li><a href="#">Bazar comedor</a></li>
-                                    <li><a href="#">Bazar cocina</a></li>
-                                    <li><a href="#">Baño</a></li>
-                                    <li><a href="#">Otras categorías</a></li>
-                              </div>
-                              <div>
-                                    <li><a href="#">Ambiente e iluminación</a></li>
-                                    <li><a href="#">Flores, floreros y macetas</a></li>
-                                    <li><a href="#">Mantas y almohadones</a></li>
-                                    <li><a href="#">Vajilla</a></li>
-                                    <li><a href="#">Accesorios para baño</a></li>
-                                    
-                                </div>
-                                <div>
-                                    <li><a href="#">Termos e infuciones</a></li>
-                                    <li><a href="#">Adornos</a></li>                           
-                                    <li><a href="#">Mantelería</a></li>
-                                    <li><a href="#">Accesorios de cocina</a></li>
-                                </div>
-                                
+
+                    
+                    <li>
+                        <a href="./contacto.html">Contacto</a>
+                    </li>
     
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">Exteriores</a>
-                        <ul class="ocultar">
-
-                            <div>
-
-                                <li><a href="#">Cuidado personal</a></li>
-                                <li><a href="#">Aromatizadores</a></li>
-                                <li><a href="#">Velas y fanales</a></li>
-
-                            </div>
-
-                        </ul>
-                
-                    </li>
-                    <li>
-                        <a href="#">Deco-baño</a>
-                        <ul class="ocultar">
-
-                            <div>
-
-                                <li><a href="#">Cuidado personal</a></li>
-                                <li><a href="#">Aromatizadores</a></li>
-                                <li><a href="#">Velas y fanales</a></li>
-
-                            </div>
-
-                        </ul>
-                
-                    </li>
-                    <li>
-                        <a href="#">Deco-comedor</a>
-                        <ul class="ocultar">
-
-                            <div>
-
-                                <li><a href="#">Cuidado personal</a></li>
-                                <li><a href="#">Aromatizadores</a></li>
-                                <li><a href="#">Velas y fanales</a></li>
-
-                            </div>
-
-                        </ul>
-                
-                    </li>
-
-                    <li>
-                        <a href="">Ofertas</a>
-                        <ul class="ocultar">
-                            <div>
-
-                                <li><a href="#">Escritura</a></li>
-                                <li><a href="#">Hobbies y manualidades</a></li>
-                                <li><a href="#">Regalos empresariales</a></li>
-
-                            </div>
-                            <div>
-
-                                <li><a href="#">Tarjetas y envoltorios</a></li>
-                                <li><a href="#">Accesorios</a></li>
-
-                            </div>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">Otras categorías</a>
-                        <ul class="ocultar">
-                            <div>
-
-                                <li><a href="#">Escritura</a></li>
-                                <li><a href="#">Hobbies y manualidades</a></li>
-                                <li><a href="#">Regalos empresariales</a></li>
-
-                            </div>
-                            <div>
-
-                                <li><a href="#">Tarjetas y envoltorios</a></li>
-                                <li><a href="#">Accesorios</a></li>
-
-                            </div>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Ver Todo</a>
-                    </li>
                     <li class="icon-cart"><i id="iconCart" class="fas fa-shopping-cart"></i></li>
                 </ul>
                 
@@ -188,10 +88,10 @@
     <main>
        
         <section id="cardCart" class="section-cart">
-            <button id="removeCart">Vaciar Carrito</button>
-            <h3>Carrito de Compras</h3>
+            <a id="removeCart">Vaciar Carrito</a>
+            <h3 class="title-cart">Carrito de Compras</h3>
             <ul id="cartList" class="cartList"></ul>
-            <div>Total: $ <p id= "totalPrice"></p></div>
+            <div id="totalPriceBox">Total: $ <p id= "totalPrice"></p></div>
             <button id="loQuiero">¡Lo Quiero!</button>
 
         </section>

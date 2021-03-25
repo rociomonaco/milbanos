@@ -1066,3 +1066,14 @@ main .section-cart{
 main .activar{
     right: 0;
 }
+main #removeCart{
+    color: #8caaa8;
+    text-decoration: underline;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    font-size: .9rem;
+}
+main .title-cart{
+    margin-top: 1.5rem;
+}

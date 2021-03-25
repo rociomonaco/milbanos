@@ -8,7 +8,7 @@
 
 class Product{
     constructor(nombre, id, categoria, stock, imagenPrincipal, itemImagen1, itemImagen2, itemImagen3, itemImagen4,
-         descripcion, precio, descuento, precioADescontar, colores, conDecuento, cantidad){
+        descripcion, precio, descuento, precioADescontar, colores, conDecuento, cantidad){
         if(nombre === "" || precio <= 0 || stock < 0){
             throw new Error('No es posible la creación del producto.');
         }
@@ -29,162 +29,11 @@ class Product{
         this.conDecuento = conDecuento;
         this.cantidad = cantidad;
     }
-    calcularDescuento(){
-        return this.precio - (this.precio * this.descuento) / 100;
-    }
+    // calcularDescuento(){
+    //     return this.precio - (this.precio * this.descuento) / 100;
+    // }
 
 }
-
-
-
-
-
-
-/* -------------------------------------------------
------------ Se parsean los items del json----------- 
------------ para obtener los objetos,---------------
------------ que se almacenan en otro array ---------
------------ a traves del metodo map ----------------
-----------------------------------------------------*/
-// const datos = `
-// [
-//     {
-//         "nombre": "Almohadon LIMA ",
-//         "id":  1,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/destacados-5.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["beige","verde","bordo"],
-//         "conDecuento" : true
-//     },
-//     {
-//         "nombre": "Almohadon PILAR ",
-//         "id":  2,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/destacados-5.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["beige","terracota","gris oscuro"],
-//         "conDecuento" : true
-//     },
-//     {
-//         "nombre": "Almohadones CLEO PACKx2",
-//         "id":  3,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/deco-opcion1.jpg", 
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",              
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["beige","rosa nude","azul marino"],
-//         "conDecuento" : "false"
-//     },
-//     {
-//         "nombre": "Almohadones KIA",
-//         "id":  4,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/destacados-1.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",          
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["durazno","turquesa","negro", "lila"],
-//         "conDecuento" : true
-//     },
-//     {
-//         "nombre": "Almohadones CLEO PACKx2",
-//         "id":  5,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/deco-opcion1.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["celeste","verde","violeta"],
-//         "conDecuento" : true
-//     },
-//     {
-//         "nombre": "Almohadones KIA",
-//         "id":  6,
-//         "categoria": "Mantas y almohadones",
-//         "stock": 30,
-//         "imagenPrincipal": "../img/destacados-1.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Almohadon confeccionado con telas de la India.",
-//         "precio": 5900,
-//         "descuento": 10,
-//         "precioADescontar": 35613,
-//         "colores": ["beige","verde","bordo"],
-//         "conDecuento" : false
-//     },
-//     {
-//         "nombre": "Silla Mila",
-//         "id":  7,
-//         "categoria": "Accesorios de living",
-//         "stock": 15,
-//         "imagenPrincipal": "../img/destacados-4.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Banco de descanso de madera, con tira de cuero",
-//         "precio":10000,
-//         "descuento": 5,
-//         "precioADescontar": 9950,
-//         "colores": ["beige","coral","marron"],
-//         "conDecuento" : true
-//     },
-//     {
-//         "nombre": "Silla Mila",
-//         "id":  8,
-//         "categoria": "Accesorios de living",
-//         "stock": 15,
-//         "imagenPrincipal": "../img/deco-living-6.jpg",
-//         "itemImagen1":"../img/destacados-5.jpg",
-//         "itemImagen2":"../img/almohadon-1.jpg",
-//         "itemImagen3":"../img/almohadon-2.jpg",
-//         "itemImagen4":"../img/almohadon-3.jpg",
-//         "descripcion": "Banco de descanso de madera, con tira de cuero",
-//         "precio":10000,
-//         "descuento": 5,
-//         "precioADescontar": 9950,
-//         "colores": ["beige","verde","bordo"],
-//         "conDecuento" : false
-//     }
-// ]`;
 
 
 // function getProductsList(){
@@ -197,24 +46,25 @@ class Product{
 //     return productsObject;   
 // }
 
-
 /* -------------------------------------------------
 ------ Obtener productos del LocalStorage ----------
 ----------------------------------------------------*/
-function getProductsLocalStorage(){
-    let cartLocalStorage = localStorage.getItem('cart');
-    if(cartLocalStorage){
-        let objectLocalStorage = JSON.parse(cartLocalStorage);
-        console.log(objectLocalStorage);
-        cart = objectLocalStorage;
-        cart.forEach(i => {
-        addProductCart(i);
-    })
-    }else{
-        cart = [];
-    } 
+$(() =>{ 
+    function getProductsLocalStorage(){
+        let cartLocalStorage = localStorage.getItem('cart');
+        console.log(cartLocalStorage);
+        if(cartLocalStorage){
+            let objectLocalStorage = JSON.parse(cartLocalStorage);
+            console.log(objectLocalStorage);
+            cart = objectLocalStorage;
+            cart.forEach(i =>{
+            addProductCart(i);
+        })
+        }else{
+            cart = [];
+        } 
 }
-
+getProductsLocalStorage()});
 /* -------------------------------------------------
 --- Añadir productos al carrito + local Storage  ---
 ----------------------------------------------------*/
@@ -223,12 +73,12 @@ function setProductsToCart(i){
     console.log(cart);
     localStorage.setItem('cart',JSON.stringify(cart));
 }
+
 /* -------------------------------------------------
 ----------- HTML de los productos ------------------
 ----------------------------------------------------*/
 const d = document;
 let cart = [];
-
 let storeList =  d.getElementById('store-list');
 let storeItem;
 let boxPriceSale;
@@ -241,24 +91,24 @@ let colorOption2;
 let colorOption3;
 let colores;
 
-
-//VER
-let products = getProductsList();
 // AJAX PROBLEMAS 
-const URLGET = "./data.json";
-$(() => {$.getJSON(URLGET,(respuesta)=>{
+$(() => {
     
-function getProductsList(){
-    let productsParse = JSON.parse(respuesta);
-    let productsObject = productsParse.map((value)=>{
-        return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-        value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+    $.getJSON("../data/data.json",(respuesta)=>{
+    function getProductsList(){
+        let datos = [];
+        datos = respuesta;
+        // let productsParse = JSON.parse(respuesta);
+        let productsObject = datos;
+        productsObject.forEach((value)=>{
+            return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+            value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
         });
         return productsObject;   
     }
-
-// getHTMLProducts FIGURA DE OTRO COLOR
-    let getHTMLProducts = products.forEach(i => {
+    
+    let products = getProductsList();
+        products.forEach(i => {
         storeItem = d.createElement('li');
         storeItem.className = 'producto-card';
 
@@ -337,8 +187,7 @@ function getProductsList(){
                 spanSale.innerHTML = i.descuento + '% OFF';
                 spanSale.className = 'spanDescuento';
                 boxPrice = d.createElement('p');
-                boxPrice.innerHTML = '$' + i.calcularDescuento();
-                
+                boxPrice.innerHTML = '$' + (i.precio - (i.precio * i.descuento) / 100);
                 
                 let payBox = d.createElement('div');
                 payBox.className = 'box-pagos';
@@ -394,11 +243,14 @@ function getProductsList(){
                 $(".agregar-carrito").click((e)=>{
                     setProductsToCart(i);
                     addProductCart(i);
-
+                    // cart = cart.filter((i) => i.id != (event.target).getAttribute('id'));
+                    // if(i.id != (event.target).getAttribute('id')){
+                    //     inputQuantity.value++;
+                    // }
+               
                     $(e.target).animate({color: 'black',
-                                        width: '200px'}, "slow", function(){
-                        console.log("final de animacion");
-                    });
+                                        left: '100px',
+                                        rigth: '100px'}, "slow");
                     $(".agregar-carrito").css({ "color": "#000"});
                 });
 
@@ -462,7 +314,6 @@ function getProductsList(){
         colorSelect.appendChild(colorOption3);
         optionsForm.appendChild(inputQuantity);
         optionsForm.appendChild(labelQuantity);
-        // boxDetail.appendChild(addCartButton);
         (boxDetail).append(addCartButton);
         containerModal.appendChild(sectionModalProduct);
         sectionModalProduct.appendChild(boxDescription);
@@ -470,145 +321,128 @@ function getProductsList(){
         boxDescription.appendChild(contentDescriptcion);
         storeItem.appendChild(containerModal);
         storeList.appendChild(storeItem);
-    
+
+        
     }); 
+}); 
 });
 
 
 let iconCart = d.getElementById('iconCart');
 let cardCart = d.getElementById('cardCart');
 let cartList = d.getElementById('cartList');
-let productQuantity; 
-productQuantity = d.createElement('input');
-productQuantity.value = 1;
 let totalPrice = d.getElementById('totalPrice');
 let removeCart = d.getElementById('removeCart');
+let totalPriceBox = d.getElementById('totalPriceBox');
 
 // Se abre y se cierra el carrito de compras.
 iconCart.addEventListener('click', ()=> {
     cardCart.classList.toggle('activar');
 });
-
+let productQuantity;
 
 // Item que se agrega al hacer click en agregar producto:
+
 function addProductCart(i){
     
-    let productItem = d.createElement('li');
-    productItem.classList.add('itemProductCart');
-    productItem.id = 'product'+ i.id;
-    
-    
-    let productName = d.createElement('h4');
-    productName.innerHTML = i.nombre;
-    // Como indico el color que se eligio ? 
-    let productColor = d.createElement('p');
-    // productColor.innerHTML = document.optionsForm.option
-    
-    
-    productQuantity.type = 'number';
-    productQuantity.id = 'cantidad' + i.id;
-    productQuantity.addEventListener('change',function(){changeQuantity(event)}); 
-    
-    let addQuantity = d.createElement('button');
-    addQuantity.id = 'agregar' + i.id; 
-    addQuantity.innerHTML = '+';
-    addQuantity.addEventListener('click',function(i){
-        productQuantity.value++;
-        console.log(productQuantity);
-        setProductsToCart(i);
-        // changeQuantity(event);
-        updateTotal(i);
-    });
-
-    // se van restando los productos pero no se eliminan del local storage. Hay errores como que se modifica el precio a NaN
-    // y ademas si tengo mas de un elemento en el carrito, al tocar en otro elemento el signo (-) o (+) se modifica el primer input.
-    let subtractProduct = d.createElement('button');
-    subtractProduct.innerHTML = '-';
-    subtractProduct.addEventListener('click', function(){
-        if(productQuantity.value > 1){
-            productQuantity.value--; 
-            console.log(productQuantity);
-        }
-
-        subtractFunction(i);
-        changeQuantity(event);
-        removeProductToLocal();
-    });
-    
-    priceProduct = d.createElement('p');
-    priceProduct.id = 'priceProductItem' + i.id;
-    priceProduct.innerHTML = '$' + i.precio;
-    
-    let removeProduct = d.createElement('button');
-    removeProduct.id = i.id;
-    removeProduct.innerHTML = 'X';
-    removeProduct.addEventListener('click', function(event){
-        let clickButton = event.target;
-        cart = cart.filter((i)=> i.id != (event.target).getAttribute('id'));
-        removeProductToLocal();
+        let productItem = d.createElement('li');
+        productItem.classList.add('itemProductCart');
+        productItem.id = 'product'+ i.id;
         
-        clickButton.closest('.itemProductCart').remove();
-        subtractFunction(i);
-    });
+        let productName = d.createElement('h4');
+        productName.innerHTML = i.nombre;
+        // Como indico el color que se eligio ? 
+        let productColor = d.createElement('p');
+        // productColor.innerHTML = document.optionsForm.option
+
+
+        productQuantity = d.createElement('input');
+        // productQuantity.value = 1
+        
+        priceProduct = d.createElement('p');
+        priceProduct.id = 'priceProductItem' + i.id;
+        // priceProduct.innerHTML = '$' + i.precio;
+        priceAndQuantity(i);
+        let removeProduct = d.createElement('button');
+        removeProduct.id = i.id;
+        removeProduct.innerHTML = 'X';
+        removeProduct.addEventListener('click', (event) => {
+                let clickButton = event.target;
+                cart = cart.filter((i) => i.id != (event.target).getAttribute('id'));
+                if (cart.length) {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } else {
+                    localStorage.removeItem('cart');
+                }
+                clickButton.closest('.itemProductCart').remove();
+                subtractFunction(i);
+                
+            });
+        
+        updateTotal(i);
     
-    updateTotal(i);
-
-    productItem.appendChild(removeProduct);
-    productItem.appendChild(productName);
-    productItem.appendChild(productQuantity);
-    productItem.appendChild(subtractProduct);
-    productItem.appendChild(addQuantity);
-    productItem.appendChild(productColor);
-    productItem.appendChild(priceProduct);
-    cartList.appendChild(productItem);  
+        productItem.appendChild(removeProduct);
+        productItem.appendChild(productName);
+        productItem.appendChild(productQuantity);
+        // productItem.appendChild(subtractProduct);
+        // productItem.appendChild(addQuantity);
+        productItem.appendChild(productColor);
+        productItem.appendChild(priceProduct);
+        cartList.appendChild(productItem);  
 }
-// problemas con estos valores al actualizarlos y en el local storage..
-
-
-function updateTotal(i){
-    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * parseInt(i.precio)));
     
-    return i.precio;
-}
-// problemas con estos valores al actualizarlos y en el local storage..
-function subtractFunction(i){
-    totalPrice.innerHTML =  (Number(totalPrice.innerHTML) - (productQuantity.value * i.precio));
-    return i.precio;
-}
 
-// problemas con estos valores al actualizarlos y en el local storage..
-function changeQuantity(event){
-    let changeInput = event.target;
-    if(changeInput.value <= 0){
-        changeInput.value = 1;
-    }
-}
 
-function removeProductToLocal(){
-    if(cart.length){
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }else{
-        localStorage.removeItem('cart');
-    }
-}
+
+
+
+
+
+// function changeQuantity(event){
+//     let changeInput = event.target;
+//     if(changeInput.value <= 0){
+//         changeInput.value = 1;
+//     }
+// }
+
+
+//  function removeProductToLocal(){
+//     if(cart.length){
+//         localStorage.setItem('cart', JSON.stringify(cart));
+//     }else{
+//         localStorage.removeItem('cart');
+//     }
+// }
+
 removeCart.addEventListener('click', function(){
     localStorage.clear(); 
     cartList.innerHTML = ``;
-    totalPrice.innerHTML = 0;
+    totalPrice.innerHTML = ``;
 
 });
 
-getProductsLocalStorage();
-            
+
+function searchFilters(input, selector){
+    d.addEventListener("keyup", (e) =>{
+    if(e.target.matches(input)){
+        
+        // el includes evalua si el valor del contenido existe en alguno de esos li // TRUE: le saca la clase filter para que se vea OR FALSE: le agrega la clase filter 
+        d.querySelectorAll(selector).forEach((el) => el.textContent.toLowerCase().
+        includes(e.target.value.toLowerCase())
+        ?el.classList.remove("filter")
+        :el.classList.add("filter")
+        )
+    }
+})}
+searchFilters(".card-filter",".producto-card");
+
+
+
 /* -------------------------------------------------
 ---------------- PROBLEMAS!!!!!!!!!!----------------
 ----------------------------------------------------*/
-// let filterLess = document.getElementById('menorPrecio');
-// filterLess.addEventListener('click', function(){
-//     let filter = products.filter(producto => producto.precio > 0);
-    
-//     //¿Como mostrarlo en dom? (desde la variable getHTMLProducts)
-// });
+
+
 // const ordenarMayorMenor =  products.sort(((a, b) => b.precio - a.precio));
 // console.log(ordenarMayorMenor);
 
@@ -616,18 +450,96 @@ getProductsLocalStorage();
 
 //COMPRAR PROBLEMAS con poner todo en el mismo script- porque a partir de que no encuentra el appendChild de la ul que aparece en STORE.html, no muestra mas nada. 
 
-// let payCart = d.getElementById('comprar');
-// let toPayCart = d.getElementById('loQuiero');
+let payCart = d.getElementById('comprar');
+let toPayCart = d.getElementById('loQuiero');
+let quieroComprar;
+let items = ``;
 
-// toPayCart.addEventListener('click',function(){
-//     location.href =  './comprar.html';
-//     cart.forEach(i => {
+toPayCart.addEventListener('click',function(){
+    let cartLocalStorage = localStorage.getItem('cart');
+    let objectLocalStorage;
+    
+    if(cartLocalStorage){
+        getLocalProducts(objectLocalStorage,cartLocalStorage);
+        let backToShop = d.createElement('a');
+        backToShop.href = '../secciones/store.html';
+        backToShop.innerHTML = 'Volver al shop';
+        storeList.appendChild(backToShop);
+        cart.forEach(i => {
+            let itemProduct = d.createElement('li');
+            let productName = d.createElement('p');
+            productName.innerHTML = i.nombre;
+            let priceItem = d.createElement('p');
+            priceItem.innerHTML = '$' + i.precio;
+    
+            storeList.appendChild(itemProduct);
+            
+            itemProduct.appendChild(productName);
+            itemProduct.appendChild(priceItem);
+    });
+    let totalCartBox = d.createElement('div');
+    totalCartBox.id = 'TotalPriceBox';
+    totalCartBox.innerHTML = 'Total $';
+    totalCartBox.appendChild(totalPrice);
+    storeList.appendChild(totalCartBox);
+    comprar = d.createElement('div');
+    comprar.innerHTML = '¿Seguro que quieres comprar?'
+    
+    let quieroComprar = d.createElement('button');
+    
+    
+        let liknWhatsapp = d.createElement('a');
+        liknWhatsapp.setAttribute('BLANK', '');
+        
+        liknWhatsapp.innerHTML = 'SI';
+        liknWhatsapp.addEventListener('click', function(i){
+            getLocalProducts(objectLocalStorage,cartLocalStorage);
+            cart.forEach(i=>{
+                items += ` ${i.nombre},`;  
+            })
+            priceAndQuantity(i);
+            let totalPriceParse = parseInt((totalPrice).innerHTML);
+            liknWhatsapp.href =`https://api.whatsapp.com/send?phone=+5491134027678&text=%C2%A1Hola!%20Has%20comprado%20los%20siguientes%20productos%20en%20Milbanos:${items}Por%20un%20total%20de%20$${totalPriceParse}.%20%C2%A1Muchas%20gracias%20por%20elegirnos!%20Para%20la%20proxima%20compra%20%20te%20regalamos%20un%2020%25%20de%20descuento%20con%20este%20c%C3%B3digo%20#Milba2021%20%20`
+        
+        });
+        quieroComprar.appendChild(liknWhatsapp);
 
-//         let nameProductCart = d.createElement('p');
-//         nameProductCart.innerHTML = i.nombre;
+    
+    let noQuieroComprar = d.createElement('button');
+    let linkNoQuiero = d.createElement('a');
+    linkNoQuiero.href = '../secciones/store.html';
+    linkNoQuiero.innerHTML = 'No ¡Quiero revisar mi carrito!';
+    storeList.appendChild(comprar);
+    comprar.appendChild(quieroComprar);
+    comprar.appendChild(noQuieroComprar);
+    noQuieroComprar.appendChild(linkNoQuiero);
+    }else{
+        cart = [];
+    } 
+    
+});
+
+function getLocalProducts(objectLocalStorage,cartLocalStorage){
+    objectLocalStorage = JSON.parse(cartLocalStorage);
+    console.log(objectLocalStorage);
+    cart = objectLocalStorage;
+    cardCart.remove();
+
+    storeList.innerHTML = ``;
+}
 
 
-//         payCart.appendChild(nameProductCart);
-//     });
+function updateTotal(i){
+    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * (parseInt(i.precio))));
+    
+    return i.precio;
+}
 
-// })
+function priceAndQuantity(i){
+    productQuantity.value = 1
+    priceProduct.innerHTML = '$' + i.precio;
+}
+function subtractFunction(i){
+    totalPrice.innerHTML =  (Number(totalPrice.innerHTML) - (productQuantity.value * i.precio));
+    return i.precio;
+}
