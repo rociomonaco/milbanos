@@ -1,4 +1,26 @@
 /* -------------------------------------------------
+-------------- VARIABLES Y CONSTANTE ---------------
+----------------------------------------------------*/
+const d = document;
+let cart = [];
+let storeList =  d.getElementById('store-list');
+let storeItem;
+let boxPrice;
+let iconCart = d.getElementById('iconCart');
+let cardCart = d.getElementById('cardCart');
+let cartList = d.getElementById('cartList');
+let totalPrice = d.getElementById('totalPrice');
+let removeCart = d.getElementById('removeCart');
+let totalPriceBox = d.getElementById('totalPriceBox');
+let contador = d.getElementById('contador');
+let productQuantity;
+let xQuantity;
+let photoProduct;
+let toPayCart = d.getElementById('loQuiero');
+let items = ``;
+
+
+/* -------------------------------------------------
 ----------- Estructura del objeto (item) -----------
 ----------------------------------------------------*/
 
@@ -46,13 +68,9 @@ function setProductsToCart(i){
 }
 
 /* -------------------------------------------------
------------ HTML de los productos ------------------
+----------- HTML de los productos + AJAX -----------
 ----------------------------------------------------*/
-const d = document;
-let cart = [];
-let storeList =  d.getElementById('store-list');
-let storeItem;
-let boxPrice;
+
 
 $(() => {
     
@@ -70,166 +88,158 @@ $(() => {
     
     let products = getProductsList();
         products.forEach(i => {
-        storeItem = d.createElement('li');
-        storeItem.className = 'producto-card';
+            storeItem = d.createElement('li');
+            storeItem.className = 'producto-card';
 
-        let imgItem = d.createElement('img');
-        imgItem.src = i.imagenPrincipal;
-        
-        let nameItem = d.createElement('p');
-        nameItem.innerHTML = i.nombre;
-        nameItem.className = 'card-name';
+            let imgItem = d.createElement('img');
+            imgItem.src = i.imagenPrincipal;
+            
+            let nameItem = d.createElement('p');
+            nameItem.innerHTML = i.nombre;
+            nameItem.className = 'card-name';
 
-        let priceItem = d.createElement('p');
-        priceItem.innerHTML = '$' + i.precio;
-        
-        let buttonVerMas = d.createElement('button');
-        
-        let linkButton = d.createElement('a');
-        linkButton.id = 'link'+i.id;
-        linkButton.innerHTML = 'Ver Más';
-        linkButton.href = '#producto' + i.id;
-        let containerModal = d.createElement('section');
-        containerModal.className = 'container-modal';
-        containerModal.id = 'producto' + i.id;
-        let sectionModalProduct = d.createElement('div');
-        sectionModalProduct.className = 'product-item';
-            let closeSectionModal = d.createElement('a');
-            closeSectionModal.href = '#';
-            closeSectionModal.className = 'close-modal';
-            closeSectionModal.innerHTML = 'X';
+            let priceItem = d.createElement('p');
+            priceItem.innerHTML = '$' + i.precio;
+            
+            let buttonVerMas = d.createElement('button');
+            
+            let linkButton = d.createElement('a');
+            linkButton.id = 'link'+i.id;
+            linkButton.innerHTML = 'Ver Más';
+            linkButton.href = '#producto' + i.id;
+            let containerModal = d.createElement('section');
+            containerModal.className = 'container-modal';
+            containerModal.id = 'producto' + i.id;
+            let sectionModalProduct = d.createElement('div');
+            sectionModalProduct.className = 'product-item';
+                let closeSectionModal = d.createElement('a');
+                closeSectionModal.href = '#';
+                closeSectionModal.className = 'close-modal';
+                closeSectionModal.innerHTML = 'X';
 
-            let galeryProduct = d.createElement('div');
-            galeryProduct.className = 'galery-product';
-                let preView = d.createElement('ul');
-                preView.className = 'pre-view';
-                    let itemPreView1 = d.createElement('li');
-                    let imgPreView1 = d.createElement('img');
-                    imgPreView1.src = i.itemImagen1;
-                    imgPreView1.addEventListener('mouseover', () =>{
-                        imgFirstView.src = i.itemImagen1;
-                    });
-                    let itemPreView2 = d.createElement('li');
-                    let imgPreView2 = d.createElement('img');
-                    imgPreView2.src = i.itemImagen2;
-                    imgPreView2.addEventListener('mouseover', () =>{
-                        imgFirstView.src = i.itemImagen2;
-                    });
-                    let itemPreView3 = d.createElement('li');
-                    let imgPreView3 = d.createElement('img');
-                    imgPreView3.src = i.itemImagen3;
-                    imgPreView3.addEventListener('mouseover', () =>{
-                        imgFirstView.src = i.itemImagen3;
-                    });
-                    let itemPreView4 = d.createElement('li');
-                    let imgPreView4 = d.createElement('img');
-                    imgPreView4.src = i.itemImagen4;
-                    imgPreView4.addEventListener('mouseover', () =>{
-                        imgFirstView.src = i.itemImagen4;
-                    });
-                
-                let firstView = d.createElement('ul');
-                    let itemFirstView = d.createElement('li');
-                    let imgFirstView = d.createElement('img');
-                    imgFirstView.src = i.imagenPrincipal;
-            let boxDetail = d.createElement('div');
-            boxDetail.insertAdjacentElement('afterbegin', closeSectionModal);
-            boxDetail.className = 'box-detalle';
-            let boxNameProduct = d.createElement('h3');
-                boxNameProduct.innerHTML = i.nombre;
-                boxPrice = d.createElement('p');
-                boxPrice.className = 'boxPrice';
-                boxPrice.innerHTML = '$' + i.precio;
-                
-                let payBox = d.createElement('div');
-                payBox.className = 'box-pagos';
-                    let iconPay = d.createElement('i');
-                    iconPay.classList.add('far', 'fa-credit-card');
-                    let textPay = d.createElement('p');
-                    textPay.innerHTML = 'Pagá en cuotas sin interés.';
-                let boxShipping = d.createElement('div');
-                boxShipping.className = 'box-envios';
-                    let iconShipping = d.createElement('i');
-                    iconShipping.classList.add('fas','fa-truck');
-                    let boxTextShipping = d.createElement('div');
-                    boxTextShipping.className = 'texto-envios';
-                        let textItem1 = d.createElement('p');
-                        textItem1.innerHTML = 'Envíos a todo el país.';
-                let addCartButton = d.createElement('button');
-                addCartButton.className = 'agregar-carrito';
-                addCartButton.id = 'agregar-carrito' + i.id; 
-                addCartButton.innerHTML = 'Agregar al carrito';
-                addCartButton.addEventListener('click',()=>{
-                        contador.innerHTML++;
-                        setProductsToCart(i);
-                        addProductCart(i);
-                    });
+                let galeryProduct = d.createElement('div');
+                galeryProduct.className = 'galery-product';
+                    let preView = d.createElement('ul');
+                    preView.className = 'pre-view';
+                        let itemPreView1 = d.createElement('li');
+                        let imgPreView1 = d.createElement('img');
+                        imgPreView1.src = i.itemImagen1;
+                        imgPreView1.addEventListener('mouseover', () =>{
+                            imgFirstView.src = i.itemImagen1;
+                        });
+                        let itemPreView2 = d.createElement('li');
+                        let imgPreView2 = d.createElement('img');
+                        imgPreView2.src = i.itemImagen2;
+                        imgPreView2.addEventListener('mouseover', () =>{
+                            imgFirstView.src = i.itemImagen2;
+                        });
+                        let itemPreView3 = d.createElement('li');
+                        let imgPreView3 = d.createElement('img');
+                        imgPreView3.src = i.itemImagen3;
+                        imgPreView3.addEventListener('mouseover', () =>{
+                            imgFirstView.src = i.itemImagen3;
+                        });
+                        let itemPreView4 = d.createElement('li');
+                        let imgPreView4 = d.createElement('img');
+                        imgPreView4.src = i.itemImagen4;
+                        imgPreView4.addEventListener('mouseover', () =>{
+                            imgFirstView.src = i.itemImagen4;
+                        });
+                    
+                    let firstView = d.createElement('ul');
+                        let itemFirstView = d.createElement('li');
+                        let imgFirstView = d.createElement('img');
+                        imgFirstView.src = i.imagenPrincipal;
+                let boxDetail = d.createElement('div');
+                boxDetail.insertAdjacentElement('afterbegin', closeSectionModal);
+                boxDetail.className = 'box-detalle';
+                let boxNameProduct = d.createElement('h3');
+                    boxNameProduct.innerHTML = i.nombre;
+                    boxPrice = d.createElement('p');
+                    boxPrice.className = 'boxPrice';
+                    boxPrice.innerHTML = '$' + i.precio;
+                    
+                    let payBox = d.createElement('div');
+                    payBox.className = 'box-pagos';
+                        let iconPay = d.createElement('i');
+                        iconPay.classList.add('far', 'fa-credit-card');
+                        let textPay = d.createElement('p');
+                        textPay.innerHTML = 'Pagá en cuotas sin interés.';
+                    let boxShipping = d.createElement('div');
+                    boxShipping.className = 'box-envios';
+                        let iconShipping = d.createElement('i');
+                        iconShipping.classList.add('fas','fa-truck');
+                        let boxTextShipping = d.createElement('div');
+                        boxTextShipping.className = 'texto-envios';
+                            let textItem1 = d.createElement('p');
+                            textItem1.innerHTML = 'Envíos a todo el país.';
+                    let addCartButton = d.createElement('button');
+                    addCartButton.className = 'agregar-carrito';
+                    addCartButton.id = 'agregar-carrito' + i.id; 
+                    addCartButton.innerHTML = 'Agregar al carrito';
+                    addCartButton.addEventListener('click',()=>{
+                            contador.innerHTML++;
+                            setProductsToCart(i);
+                            addProductCart(i);
+                        });
 
-            let boxDescription = d.createElement('div');
-            boxDescription.className = 'box-descripcion';
-            let titleDescription =  d.createElement('h4');
-                titleDescription.innerHTML = 'Descripción';
-            let contentDescriptcion =  d.createElement('p');
-            contentDescriptcion.innerHTML = i.descripcion;
-        
-        
-        storeItem.appendChild(imgItem);
-        storeItem.appendChild(nameItem);
-        storeItem.appendChild(priceItem);
-        storeItem.appendChild(buttonVerMas);
-        buttonVerMas.appendChild(linkButton);
-        sectionModalProduct.appendChild(galeryProduct);
-        galeryProduct.appendChild(preView);
-        preView.appendChild(itemPreView1);
-        itemPreView1.appendChild(imgPreView1);
-        preView.appendChild(itemPreView2);
-        itemPreView2.appendChild(imgPreView2);
-        preView.appendChild(itemPreView3);
-        itemPreView3.appendChild(imgPreView3);
-        preView.appendChild(itemPreView4);
-        itemPreView4.appendChild(imgPreView4);
-        galeryProduct.appendChild(firstView);
-        firstView.appendChild(itemFirstView);
-        itemFirstView.appendChild(imgFirstView);
-        sectionModalProduct.appendChild(boxDetail);
-        boxDetail.appendChild(boxNameProduct);
-        boxDetail.appendChild(boxPrice);
-        boxDetail.appendChild(payBox);
-        payBox.appendChild(iconPay);
-        payBox.appendChild(textPay);
-        boxDetail.appendChild(boxShipping);
-        boxShipping.appendChild(iconShipping);
-        boxShipping.appendChild(boxTextShipping);
-        boxTextShipping.appendChild(textItem1);
-        boxDetail.appendChild(addCartButton);
-        containerModal.appendChild(sectionModalProduct);
-        sectionModalProduct.appendChild(boxDescription);
-        boxDescription.appendChild(titleDescription);
-        boxDescription.appendChild(contentDescriptcion);
-        storeItem.appendChild(containerModal);
-        storeList.appendChild(storeItem);
+                let boxDescription = d.createElement('div');
+                boxDescription.className = 'box-descripcion';
+                let titleDescription =  d.createElement('h4');
+                    titleDescription.innerHTML = 'Descripción';
+                let contentDescriptcion =  d.createElement('p');
+                contentDescriptcion.innerHTML = i.descripcion;
+            
+            
+            storeItem.appendChild(imgItem);
+            storeItem.appendChild(nameItem);
+            storeItem.appendChild(priceItem);
+            storeItem.appendChild(buttonVerMas);
+            buttonVerMas.appendChild(linkButton);
+            sectionModalProduct.appendChild(galeryProduct);
+            galeryProduct.appendChild(preView);
+            preView.appendChild(itemPreView1);
+            itemPreView1.appendChild(imgPreView1);
+            preView.appendChild(itemPreView2);
+            itemPreView2.appendChild(imgPreView2);
+            preView.appendChild(itemPreView3);
+            itemPreView3.appendChild(imgPreView3);
+            preView.appendChild(itemPreView4);
+            itemPreView4.appendChild(imgPreView4);
+            galeryProduct.appendChild(firstView);
+            firstView.appendChild(itemFirstView);
+            itemFirstView.appendChild(imgFirstView);
+            sectionModalProduct.appendChild(boxDetail);
+            boxDetail.appendChild(boxNameProduct);
+            boxDetail.appendChild(boxPrice);
+            boxDetail.appendChild(payBox);
+            payBox.appendChild(iconPay);
+            payBox.appendChild(textPay);
+            boxDetail.appendChild(boxShipping);
+            boxShipping.appendChild(iconShipping);
+            boxShipping.appendChild(boxTextShipping);
+            boxTextShipping.appendChild(textItem1);
+            boxDetail.appendChild(addCartButton);
+            containerModal.appendChild(sectionModalProduct);
+            sectionModalProduct.appendChild(boxDescription);
+            boxDescription.appendChild(titleDescription);
+            boxDescription.appendChild(contentDescriptcion);
+            storeItem.appendChild(containerModal);
+            storeList.appendChild(storeItem);
+        }); 
     }); 
-}); 
 });
 
-let iconCart = d.getElementById('iconCart');
-let cardCart = d.getElementById('cardCart');
-let cartList = d.getElementById('cartList');
-let totalPrice = d.getElementById('totalPrice');
-let removeCart = d.getElementById('removeCart');
-let totalPriceBox = d.getElementById('totalPriceBox');
-let contador = d.getElementById('contador');
 
-// Se abre y se cierra el carrito de compras.
+
+// Se abre y se cierra el carrito de compras
 iconCart.addEventListener('click', ()=> {
     cardCart.classList.toggle('activar');
 });
 
 
 // Item que se agrega al hacer click en agregar producto:
-let productQuantity;
-let xQuantity;
-let photoProduct;
+
 function addProductCart(i){
         let productItem = d.createElement('li');
         productItem.classList.add('itemProductCart');
@@ -285,8 +295,8 @@ removeCart.addEventListener('click', function(){
     contador.innerHTML= 0;
 });
 
-let toPayCart = d.getElementById('loQuiero');
-let items = ``;
+
+// Al tocar ¡Lo quiero! se genera html-->
 toPayCart.addEventListener('click',function(i){
     let cartLocalStorage = localStorage.getItem('cart');
     let objectLocalStorage;
@@ -342,6 +352,7 @@ toPayCart.addEventListener('click',function(i){
         liknWhatsapp.innerHTML = 'Comprar';
         liknWhatsapp.addEventListener('click', function(){
         function wsp(i){
+            // API WPS 
             getLocalProducts(objectLocalStorage,cartLocalStorage);
             cart.forEach(i=>{
                 items += ` ${i.nombre},`;  
@@ -393,6 +404,7 @@ toPayCart.addEventListener('click',function(i){
     
 });
 
+// Obtengo productos del Local Storage y  elimino html para sobre escribir el mismo. (COMPRAR PRODUCTO)
 function getLocalProducts(objectLocalStorage,cartLocalStorage){
     objectLocalStorage = JSON.parse(cartLocalStorage);
     cart = objectLocalStorage;
@@ -400,6 +412,7 @@ function getLocalProducts(objectLocalStorage,cartLocalStorage){
     storeList.innerHTML = ``;
 }
 
+//Se suma del total
 function updateTotal(){
     totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * (parseInt(priceProduct.innerHTML))));
 }
@@ -411,6 +424,7 @@ function priceAndQuantity(i){
     priceProduct.innerHTML = i.precio;
 }
 
+// Se resta del total
 function subtractFunction(){
     totalPrice.innerHTML = (Number(totalPrice.innerHTML) - (parseInt(productQuantity.value)) * (parseInt(priceProduct.innerHTML)));  
 }
@@ -421,6 +435,7 @@ $(() => {
     contador.innerHTML = cart.length;
 })
 
+// Buscador de productos con clases de css y eventos.
 function searchFilters(input, selector){
     d.addEventListener("keyup", (e) =>{
     if(e.target.matches(input)){
