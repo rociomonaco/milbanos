@@ -1,20 +1,15 @@
-
-
-
-
 /* -------------------------------------------------
 ----------- Estructura del objeto (item) -----------
 ----------------------------------------------------*/
 
 class Product{
-    constructor(nombre, id, categoria, stock, imagenPrincipal, itemImagen1, itemImagen2, itemImagen3, itemImagen4,
-        descripcion, precio, descuento, precioADescontar, colores, conDecuento, cantidad){
+    constructor(nombre, id, stock, imagenPrincipal, itemImagen1, itemImagen2, itemImagen3, itemImagen4,
+        descripcion, precio, cantidad){
         if(nombre === "" || precio <= 0 || stock < 0){
             throw new Error('No es posible la creación del producto.');
         }
         this.nombre = nombre;
         this.id = id;
-        this.categoria = categoria;
         this.stock = stock;
         this.imagenPrincipal = imagenPrincipal;
         this.itemImagen1 = itemImagen1;
@@ -23,36 +18,15 @@ class Product{
         this.itemImagen4 = itemImagen4;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.descuento = descuento;
-        this.precioADescontar = precioADescontar;
-        this.colores = colores;
-        this.conDecuento = conDecuento;
         this.cantidad = cantidad;
     }
-    // calcularDescuento(){
-    //     return this.precio - (this.precio * this.descuento) / 100;
-    // }
-
 }
-
-
-// function getProductsList(){
-//     let productsParse = JSON.parse(datos);
-//     console.log(productsParse);
-//     let productsObject = productsParse.map((value)=>{
-//         return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-//         value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
-//     });
-//     return productsObject;   
-// }
 
 /* -------------------------------------------------
 ------ Obtener productos del LocalStorage ----------
 ----------------------------------------------------*/
-$(() =>{ 
     function getProductsLocalStorage(){
         let cartLocalStorage = localStorage.getItem('cart');
-        console.log(cartLocalStorage);
         if(cartLocalStorage){
             let objectLocalStorage = JSON.parse(cartLocalStorage);
             console.log(objectLocalStorage);
@@ -63,8 +37,8 @@ $(() =>{
         }else{
             cart = [];
         } 
-}
-getProductsLocalStorage()});
+    }
+
 /* -------------------------------------------------
 --- Añadir productos al carrito + local Storage  ---
 ----------------------------------------------------*/
@@ -81,28 +55,18 @@ const d = document;
 let cart = [];
 let storeList =  d.getElementById('store-list');
 let storeItem;
-let boxPriceSale;
-let spanSale;
 let boxPrice;
-let optionsForm;
-let priceProduct;
-let colorOption1;
-let colorOption2;
-let colorOption3;
-let colores;
 
-// AJAX PROBLEMAS 
 $(() => {
     
     $.getJSON("../data/data.json",(respuesta)=>{
     function getProductsList(){
         let datos = [];
         datos = respuesta;
-        // let productsParse = JSON.parse(respuesta);
         let productsObject = datos;
         productsObject.forEach((value)=>{
-            return new Product(value.nombre, value.id, value.categoria, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-            value.descripcion, value.precio, value.descuento, value.precioADescontar, value.colores, value.conDecuento, value.cantidad);
+            return new Product(value.nombre, value.id, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
+            value.descripcion, value.precio, value.cantidad);
         });
         return productsObject;   
     }
@@ -116,20 +80,16 @@ $(() => {
         imgItem.src = i.imagenPrincipal;
         
         let nameItem = d.createElement('p');
-        nameItem.textContent = i.nombre;
+        nameItem.innerHTML = i.nombre;
         nameItem.className = 'card-name';
 
         let priceItem = d.createElement('p');
-        priceItem.textContent = '$' + i.precio;
-        let priceADescontarItem = d.createElement('span');
-        priceADescontarItem.textContent =  '  $' + i.precioADescontar;
-        let priceDescuentoBox = d.createElement('p');
-        priceDescuentoBox.textContent = i.descuento + '% OFF';
+        priceItem.innerHTML = '$' + i.precio;
         
         let buttonVerMas = d.createElement('button');
         
         let linkButton = d.createElement('a');
-        linkButton.id = i.id;
+        linkButton.id = 'link'+i.id;
         linkButton.innerHTML = 'Ver Más';
         linkButton.href = '#producto' + i.id;
         let containerModal = d.createElement('section');
@@ -180,14 +140,9 @@ $(() => {
             boxDetail.className = 'box-detalle';
             let boxNameProduct = d.createElement('h3');
                 boxNameProduct.innerHTML = i.nombre;
-                boxPriceSale = d.createElement('span');
-                boxPriceSale.innerHTML = '$' + i.precio;
-                boxPriceSale.className = 'spanPrecio';
-                spanSale = d.createElement('span');
-                spanSale.innerHTML = i.descuento + '% OFF';
-                spanSale.className = 'spanDescuento';
                 boxPrice = d.createElement('p');
-                boxPrice.innerHTML = '$' + (i.precio - (i.precio * i.descuento) / 100);
+                boxPrice.className = 'boxPrice';
+                boxPrice.innerHTML = '$' + i.precio;
                 
                 let payBox = d.createElement('div');
                 payBox.className = 'box-pagos';
@@ -195,10 +150,6 @@ $(() => {
                     iconPay.classList.add('far', 'fa-credit-card');
                     let textPay = d.createElement('p');
                     textPay.innerHTML = 'Pagá en cuotas sin interés.';
-                    let linkPay = d.createElement('a');
-                    linkPay.href = '#';
-                    linkPay.innerHTML  = 'Ver más.';
-                    textPay.insertAdjacentElement('beforeend',linkPay);
                 let boxShipping = d.createElement('div');
                 boxShipping.className = 'box-envios';
                     let iconShipping = d.createElement('i');
@@ -206,53 +157,16 @@ $(() => {
                     let boxTextShipping = d.createElement('div');
                     boxTextShipping.className = 'texto-envios';
                         let textItem1 = d.createElement('p');
-                        textItem1.innerHTML = 'Envíos a todo el país';
-                        let textItem2 = d.createElement('p');
-                        let linkShipping = d.createElement('a');
-                        linkShipping.href = '#';
-                        linkShipping.innerHTML =  'Conocé los tiempos y las formas de envío.';
-                        
-                boxShipping.className = 'box-envios';
-                optionsForm = d.createElement('form');
-                let colorSelect = d.createElement('select');
-                let colorOptionDefault = d.createElement('option');
-                colorOptionDefault.innerText = 'Elegí el color';
-                colorOptionDefault.setAttribute('selected', "selected");
-                colorOptionDefault.setAttribute('disabled', "");
-                colores =  i.colores;
-                for(b = 0; b < colores.length; b++){
-                    colorOption1 = d.createElement('option');
-                        colorOption2 = d.createElement('option');
-                        colorOption3 = d.createElement('option');
-                        colorOption4 = d.createElement('option');
-                        colorOption1.innerHTML = i.colores[0];
-                        colorOption2.innerHTML = i.colores[1];
-                        colorOption3.innerHTML = i.colores[2];
-                }
-            
-                let labelQuantity = d.createElement('label');
-                labelQuantity.for = 'cantidad';
-                labelQuantity.innerHTML = 'Cantidad';
-                let inputQuantity = d.createElement('input');
-                inputQuantity.id = 'cantidad';
-                inputQuantity.type = 'number';
+                        textItem1.innerHTML = 'Envíos a todo el país.';
                 let addCartButton = d.createElement('button');
                 addCartButton.className = 'agregar-carrito';
-                addCartButton.id = "agregarCarrito" + i.id;
+                addCartButton.id = 'agregar-carrito' + i.id; 
                 addCartButton.innerHTML = 'Agregar al carrito';
-                $(".agregar-carrito").click((e)=>{
-                    setProductsToCart(i);
-                    addProductCart(i);
-                    // cart = cart.filter((i) => i.id != (event.target).getAttribute('id'));
-                    // if(i.id != (event.target).getAttribute('id')){
-                    //     inputQuantity.value++;
-                    // }
-               
-                    $(e.target).animate({color: 'black',
-                                        left: '100px',
-                                        rigth: '100px'}, "slow");
-                    $(".agregar-carrito").css({ "color": "#000"});
-                });
+                addCartButton.addEventListener('click',()=>{
+                        contador.innerHTML++;
+                        setProductsToCart(i);
+                        addProductCart(i);
+                    });
 
             let boxDescription = d.createElement('div');
             boxDescription.className = 'box-descripcion';
@@ -264,14 +178,7 @@ $(() => {
         
         storeItem.appendChild(imgItem);
         storeItem.appendChild(nameItem);
-        if(i.conDecuento === true){
-            storeItem.appendChild(priceItem);
-            storeItem.appendChild(priceDescuentoBox);
-            priceDescuentoBox.appendChild(priceADescontarItem);
-        }else{
-            storeItem.appendChild(priceItem);
-        }
-
+        storeItem.appendChild(priceItem);
         storeItem.appendChild(buttonVerMas);
         buttonVerMas.appendChild(linkButton);
         sectionModalProduct.appendChild(galeryProduct);
@@ -289,14 +196,7 @@ $(() => {
         itemFirstView.appendChild(imgFirstView);
         sectionModalProduct.appendChild(boxDetail);
         boxDetail.appendChild(boxNameProduct);
-        if(i.conDecuento === true){
-            boxDetail.appendChild(boxPriceSale);
-            boxDetail.appendChild(spanSale);
-            boxDetail.appendChild(boxPrice);
-        }else{
-            boxDetail.appendChild(boxPrice);
-        }
-        
+        boxDetail.appendChild(boxPrice);
         boxDetail.appendChild(payBox);
         payBox.appendChild(iconPay);
         payBox.appendChild(textPay);
@@ -304,29 +204,16 @@ $(() => {
         boxShipping.appendChild(iconShipping);
         boxShipping.appendChild(boxTextShipping);
         boxTextShipping.appendChild(textItem1);
-        boxTextShipping.appendChild(textItem2);
-        textItem2.appendChild(linkShipping);
-        boxDetail.appendChild(optionsForm);
-        optionsForm.appendChild(colorSelect);
-        colorSelect.appendChild(colorOptionDefault);
-        colorSelect.appendChild(colorOption1);
-        colorSelect.appendChild(colorOption2);
-        colorSelect.appendChild(colorOption3);
-        optionsForm.appendChild(inputQuantity);
-        optionsForm.appendChild(labelQuantity);
-        (boxDetail).append(addCartButton);
+        boxDetail.appendChild(addCartButton);
         containerModal.appendChild(sectionModalProduct);
         sectionModalProduct.appendChild(boxDescription);
         boxDescription.appendChild(titleDescription);
         boxDescription.appendChild(contentDescriptcion);
         storeItem.appendChild(containerModal);
         storeList.appendChild(storeItem);
-
-        
     }); 
 }); 
 });
-
 
 let iconCart = d.getElementById('iconCart');
 let cardCart = d.getElementById('cardCart');
@@ -334,99 +221,212 @@ let cartList = d.getElementById('cartList');
 let totalPrice = d.getElementById('totalPrice');
 let removeCart = d.getElementById('removeCart');
 let totalPriceBox = d.getElementById('totalPriceBox');
+let contador = d.getElementById('contador');
 
 // Se abre y se cierra el carrito de compras.
 iconCart.addEventListener('click', ()=> {
     cardCart.classList.toggle('activar');
 });
-let productQuantity;
+
 
 // Item que se agrega al hacer click en agregar producto:
-
+let productQuantity;
+let xQuantity;
+let photoProduct;
 function addProductCart(i){
-    
         let productItem = d.createElement('li');
         productItem.classList.add('itemProductCart');
         productItem.id = 'product'+ i.id;
-        
         let productName = d.createElement('h4');
         productName.innerHTML = i.nombre;
-        // Como indico el color que se eligio ? 
-        let productColor = d.createElement('p');
-        // productColor.innerHTML = document.optionsForm.option
-
-
+        productName.className = 'productName';
         productQuantity = d.createElement('input');
-        // productQuantity.value = 1
-        
+        xQuantity = d.createElement('p');
+        xQuantity.innerHTML = 'x';
         priceProduct = d.createElement('p');
         priceProduct.id = 'priceProductItem' + i.id;
-        // priceProduct.innerHTML = '$' + i.precio;
+        priceProduct.className = 'priceProduct';
         priceAndQuantity(i);
-        let removeProduct = d.createElement('button');
-        removeProduct.id = i.id;
-        removeProduct.innerHTML = 'X';
-        removeProduct.addEventListener('click', (event) => {
-                let clickButton = event.target;
-                cart = cart.filter((i) => i.id != (event.target).getAttribute('id'));
-                if (cart.length) {
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                } else {
-                    localStorage.removeItem('cart');
-                }
-                clickButton.closest('.itemProductCart').remove();
-                subtractFunction(i);
-                
-            });
+        photoProduct = d.createElement('img');
+        photoProduct.src = i.itemImagen1; 
+        photoProduct.className = 'photoProduct';
         
-        updateTotal(i);
-    
+        let removeProduct = d.createElement('i');
+        removeProduct.id = i.id;
+        removeProduct.className = 'removeProduct';
+        removeProduct.classList.add('fas','fa-trash');
+        removeProduct.innerHTML = '';
+        removeProduct.addEventListener('click',(event) => {
+            let clickButton = event.target;
+            cart = cart.filter((i) => i.id != (event.target).getAttribute('id'));
+            if (cart.length) {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } else {
+                localStorage.removeItem('cart');
+            }
+            contador.innerHTML--;
+            clickButton.closest('.itemProductCart').remove();
+            subtractFunction(i);
+        });
+        
+        updateTotal();
         productItem.appendChild(removeProduct);
         productItem.appendChild(productName);
+        productItem.appendChild(photoProduct);
         productItem.appendChild(productQuantity);
-        // productItem.appendChild(subtractProduct);
-        // productItem.appendChild(addQuantity);
-        productItem.appendChild(productColor);
+        productItem.appendChild(xQuantity);
         productItem.appendChild(priceProduct);
         cartList.appendChild(productItem);  
 }
-    
 
 
-
-
-
-
-
-// function changeQuantity(event){
-//     let changeInput = event.target;
-//     if(changeInput.value <= 0){
-//         changeInput.value = 1;
-//     }
-// }
-
-
-//  function removeProductToLocal(){
-//     if(cart.length){
-//         localStorage.setItem('cart', JSON.stringify(cart));
-//     }else{
-//         localStorage.removeItem('cart');
-//     }
-// }
-
+//Remover todo el carrito
 removeCart.addEventListener('click', function(){
     localStorage.clear(); 
     cartList.innerHTML = ``;
-    totalPrice.innerHTML = ``;
-
+    totalPrice.innerHTML = 0;
+    contador.innerHTML= 0;
 });
 
+let toPayCart = d.getElementById('loQuiero');
+let items = ``;
+toPayCart.addEventListener('click',function(i){
+    let cartLocalStorage = localStorage.getItem('cart');
+    let objectLocalStorage;
+    if(cartLocalStorage){
+        getLocalProducts(objectLocalStorage,cartLocalStorage);
+        let divDataPurchase = d.createElement('div');
+        divDataPurchase.className = "divDataPurchase";
+        storeList.appendChild(divDataPurchase);
+        let sectionBackLink = d.createElement('section');
+        sectionBackLink.id = 'sectionBackLink';
+        let backToShop = d.createElement('a');
+        backToShop.href = '../secciones/store.html';
+        backToShop.innerHTML = 'Volver al shop';
+        backToShop.id = 'backToShop';
+        sectionBackLink.appendChild(backToShop);
+        storeList.insertAdjacentElement('beforebegin',sectionBackLink);
+        sectionBackLink.appendChild(backToShop);
+        let listPurchase = d.createElement('ul');
+        listPurchase.className = 'listPurchase';
+        divDataPurchase.appendChild(listPurchase);
+        cart.forEach(i => {
+                let itemProduct = d.createElement('li');
+                itemProduct.className = 'itemProductPurchase';
+                let productName = d.createElement('p');
+                productName.className = 'productNamePurchase'
+                productName.innerHTML = i.nombre;
+                productQuantity = d.createElement('input');
+                xQuantity= d.createElement('p');
+                xQuantity.innerHTML ='x';
+                priceProduct = d.createElement('p');
+                priceProduct.className = 'priceProduct';
+                priceProduct.innerHTML = '$' + i.precio;
+                priceAndQuantity(i);
+                listPurchase.appendChild(itemProduct);
+                itemProduct.appendChild(productName);
+                itemProduct.appendChild(productQuantity);
+                itemProduct.appendChild(xQuantity);
+                itemProduct.appendChild(priceProduct);
+    });
+    let totalCartBox = d.createElement('div');
+    totalCartBox.id = 'TotalPriceBox';
+    totalCartBox.innerHTML = 'Total $';
+    totalCartBox.appendChild(totalPrice);
+    divDataPurchase.appendChild(totalCartBox);
+
+    let buttomPurchase = d.createElement('div');
+    let quieroComprar = d.createElement('button');
+    quieroComprar.className = 'buttomPurchase'
+    
+        let liknWhatsapp = d.createElement('a');
+        liknWhatsapp.setAttribute('BLANK', '');
+        liknWhatsapp.className = 'linkWsp';
+        liknWhatsapp.innerHTML = 'Comprar';
+        liknWhatsapp.addEventListener('click', function(){
+        function wsp(i){
+            getLocalProducts(objectLocalStorage,cartLocalStorage);
+            cart.forEach(i=>{
+                items += ` ${i.nombre},`;  
+            })
+            priceAndQuantity(i);
+            let totalPriceParse = parseInt((totalPrice).innerHTML);
+            liknWhatsapp.href =`https://api.whatsapp.com/send?phone=+5491123878307&text=%C2%A1Hola!%20Has%20comprado%20los%20siguientes%20productos%20en%20Milbanos:${items}Por%20un%20total%20de%20$${totalPriceParse}.%20%C2%A1Muchas%20gracias%20por%20elegirnos!`
+        
+        };
+        liknWhatsapp.addEventListener('click',()=>{
+            
+            storeList.innerHTML = '';
+            let spinnerLoading = d.createElement('img');
+            spinnerLoading.src = '../img/spinner.svg';
+            storeList.appendChild(spinnerLoading);
+            setTimeout(() => {
+                spinnerLoading.remove()
+                storeList.innerHTML = "";
+                let check = d.createElement('img');
+                check.src = '../img/check.png';
+                check.className = 'check';
+                storeList.appendChild(check);
+            }, 1000);
+            setTimeout(()=>{
+                wsp(i);
+                window.location.href = liknWhatsapp.href;
+            },3000);
+        })
+    });
+    quieroComprar.appendChild(liknWhatsapp);
+    divDataPurchase.appendChild(buttomPurchase);
+    buttomPurchase.appendChild(quieroComprar);
+    }else{
+        getLocalProducts(objectLocalStorage,cartLocalStorage)
+
+        let sectionBackLink = d.createElement('section');
+        sectionBackLink.id = 'sectionBackLink';
+        let backToShop = d.createElement('a');
+        backToShop.href = '../secciones/store.html';
+        backToShop.innerHTML = 'Volver al shop';
+        backToShop.id = 'backToShop';
+        storeList.appendChild(sectionBackLink);
+        sectionBackLink.appendChild(backToShop);
+        sectionBackLink.classList.add('positionLinkBackToCart');
+        let textCart = d.createElement('p');
+        textCart.innerHTML = 'El carrito está vacío.';
+        storeList.appendChild(textCart) 
+    } 
+    
+});
+
+function getLocalProducts(objectLocalStorage,cartLocalStorage){
+    objectLocalStorage = JSON.parse(cartLocalStorage);
+    cart = objectLocalStorage;
+    cardCart.remove();
+    storeList.innerHTML = ``;
+}
+
+function updateTotal(){
+    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * (parseInt(priceProduct.innerHTML))));
+}
+
+function priceAndQuantity(i){
+    productQuantity.value = 1
+    productQuantity.className = 'productQuantity';
+    xQuantity.className = 'xQuantity';
+    priceProduct.innerHTML = i.precio;
+}
+
+function subtractFunction(){
+    totalPrice.innerHTML = (Number(totalPrice.innerHTML) - (parseInt(productQuantity.value)) * (parseInt(priceProduct.innerHTML)));  
+}
+
+getProductsLocalStorage();
+
+$(() => {
+    contador.innerHTML = cart.length;
+})
 
 function searchFilters(input, selector){
     d.addEventListener("keyup", (e) =>{
     if(e.target.matches(input)){
-        
-        // el includes evalua si el valor del contenido existe en alguno de esos li // TRUE: le saca la clase filter para que se vea OR FALSE: le agrega la clase filter 
         d.querySelectorAll(selector).forEach((el) => el.textContent.toLowerCase().
         includes(e.target.value.toLowerCase())
         ?el.classList.remove("filter")
@@ -435,111 +435,3 @@ function searchFilters(input, selector){
     }
 })}
 searchFilters(".card-filter",".producto-card");
-
-
-
-/* -------------------------------------------------
----------------- PROBLEMAS!!!!!!!!!!----------------
-----------------------------------------------------*/
-
-
-// const ordenarMayorMenor =  products.sort(((a, b) => b.precio - a.precio));
-// console.log(ordenarMayorMenor);
-
-
-
-//COMPRAR PROBLEMAS con poner todo en el mismo script- porque a partir de que no encuentra el appendChild de la ul que aparece en STORE.html, no muestra mas nada. 
-
-let payCart = d.getElementById('comprar');
-let toPayCart = d.getElementById('loQuiero');
-let quieroComprar;
-let items = ``;
-
-toPayCart.addEventListener('click',function(){
-    let cartLocalStorage = localStorage.getItem('cart');
-    let objectLocalStorage;
-    
-    if(cartLocalStorage){
-        getLocalProducts(objectLocalStorage,cartLocalStorage);
-        let backToShop = d.createElement('a');
-        backToShop.href = '../secciones/store.html';
-        backToShop.innerHTML = 'Volver al shop';
-        storeList.appendChild(backToShop);
-        cart.forEach(i => {
-            let itemProduct = d.createElement('li');
-            let productName = d.createElement('p');
-            productName.innerHTML = i.nombre;
-            let priceItem = d.createElement('p');
-            priceItem.innerHTML = '$' + i.precio;
-    
-            storeList.appendChild(itemProduct);
-            
-            itemProduct.appendChild(productName);
-            itemProduct.appendChild(priceItem);
-    });
-    let totalCartBox = d.createElement('div');
-    totalCartBox.id = 'TotalPriceBox';
-    totalCartBox.innerHTML = 'Total $';
-    totalCartBox.appendChild(totalPrice);
-    storeList.appendChild(totalCartBox);
-    comprar = d.createElement('div');
-    comprar.innerHTML = '¿Seguro que quieres comprar?'
-    
-    let quieroComprar = d.createElement('button');
-    
-    
-        let liknWhatsapp = d.createElement('a');
-        liknWhatsapp.setAttribute('BLANK', '');
-        
-        liknWhatsapp.innerHTML = 'SI';
-        liknWhatsapp.addEventListener('click', function(i){
-            getLocalProducts(objectLocalStorage,cartLocalStorage);
-            cart.forEach(i=>{
-                items += ` ${i.nombre},`;  
-            })
-            priceAndQuantity(i);
-            let totalPriceParse = parseInt((totalPrice).innerHTML);
-            liknWhatsapp.href =`https://api.whatsapp.com/send?phone=+5491134027678&text=%C2%A1Hola!%20Has%20comprado%20los%20siguientes%20productos%20en%20Milbanos:${items}Por%20un%20total%20de%20$${totalPriceParse}.%20%C2%A1Muchas%20gracias%20por%20elegirnos!%20Para%20la%20proxima%20compra%20%20te%20regalamos%20un%2020%25%20de%20descuento%20con%20este%20c%C3%B3digo%20#Milba2021%20%20`
-        
-        });
-        quieroComprar.appendChild(liknWhatsapp);
-
-    
-    let noQuieroComprar = d.createElement('button');
-    let linkNoQuiero = d.createElement('a');
-    linkNoQuiero.href = '../secciones/store.html';
-    linkNoQuiero.innerHTML = 'No ¡Quiero revisar mi carrito!';
-    storeList.appendChild(comprar);
-    comprar.appendChild(quieroComprar);
-    comprar.appendChild(noQuieroComprar);
-    noQuieroComprar.appendChild(linkNoQuiero);
-    }else{
-        cart = [];
-    } 
-    
-});
-
-function getLocalProducts(objectLocalStorage,cartLocalStorage){
-    objectLocalStorage = JSON.parse(cartLocalStorage);
-    console.log(objectLocalStorage);
-    cart = objectLocalStorage;
-    cardCart.remove();
-
-    storeList.innerHTML = ``;
-}
-
-
-function updateTotal(i){
-    totalPrice.innerHTML = (Number(totalPrice.innerHTML) + (parseInt(productQuantity.value) * (parseInt(i.precio))));
-    
-    return i.precio;
-}
-
-function priceAndQuantity(i){
-    productQuantity.value = 1
-    priceProduct.innerHTML = '$' + i.precio;
-}
-function subtractFunction(i){
-    totalPrice.innerHTML =  (Number(totalPrice.innerHTML) - (productQuantity.value * i.precio));
-    return i.precio;
-}

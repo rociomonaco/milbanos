@@ -7,7 +7,7 @@ function conctactFormValidation(){
         const span = d.createElement('span');
         span.id = input.name;
         console.log(span.id);
-        span.textContent = input.title;
+        span.innerHTML = input.title;
         span.classList.add('contact-form-error','none');
         input.insertAdjacentElement('afterend',span);
     });
@@ -30,10 +30,13 @@ function conctactFormValidation(){
 }
 
 let sendForm = d.getElementById('sendForm');
+let inputs = d.getElementsByTagName('input');
 sendForm.addEventListener('click', ((e)=>{
-    e.preventDefault();
-    window.location.href ="./agradecimiento-contacto.html";
+    if(inputs.value ){
+        e.preventDefault();
+        window.location.href ="./agradecimiento-contacto.html";
+    }
 
-}))
+}));
 
 

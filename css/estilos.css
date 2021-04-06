@@ -100,7 +100,7 @@ section .navbar{
     margin-top: 1rem;
 }
 
-section .navbar > ul li {
+section .navbar  ul > li {
     margin-left: 2rem;
     display: block;
     padding-bottom: 1rem;
@@ -145,13 +145,37 @@ section .navbar ul li:hover  .ocultar div li{
 .open-menu, .close-menu{
     display:none;
 }
+.contenedor-cart-count{
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    background-color: white;
+    width: 5%;
+
+
+}
+.contenedor-cart-count #contador{
+    margin: auto;
+    position: absolute;
+    width:25px;
+    z-index:1;
+    top: -17px;
+    right: 2.7rem;
+    border: 1px solid #8caaa8;
+    background-color: #8caaa8;
+    color: white;
+    border-radius: 1rem;
+    text-align: center;
+}
+.icon-cart{
+    width:100px;
+    height:100px;
+    position: absolute;
+    z-index:2;
+}
 .navbar li  .fa-shopping-cart{
-   position: absolute;
-   right: 3rem;
-   width: 1.5rem;
-   background-color: white;
-   border: 1px solid  #AFC2D5;
-  
+    /* width: auto; */
+    cursor: pointer;
 }
 
 .navbar li  .fa-shopping-cart::before{
@@ -451,13 +475,14 @@ footer .newsletter ul li i:hover a{
 footer .secciones-footer{
     width: 80%;
     margin: auto;
-    border-top: 1.5px solid #AFC2D5;
+    /* border-top: 1.5px solid #AFC2D5; */
     padding-top: 2rem;
 }
 
 footer .secciones-footer .categorias-footer{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    text-align: center;
 }
 footer .categorias-footer ul h5{
     font-size: 1.25rem;
@@ -465,6 +490,14 @@ footer .categorias-footer ul h5{
     margin-bottom: .5rem;
     font-weight: 500;
     line-height: 1.2;
+    color: #8caaa8;
+}
+footer .categorias-footer ul li a{
+    cursor: pointer;
+    text-align: center;
+}
+footer .categorias-footer ul li a:hover{
+    color:#A8CCC9
 }
 /* COPY FOOTER */
 
@@ -506,7 +539,7 @@ footer .copy-footer img{
     /* background-color:#adbd99; */
     background-color: white;
 }
-.products #store-list .producto-card button a{
+.products #store-list .producto-card > button a{
 
     /* color: white; */
     color:#adbd99;
@@ -577,7 +610,7 @@ footer .copy-footer img{
     position: relative;
 
 }
-.product-item .box-detalle .close-modal{
+.close-modal{
     position: absolute;
     top:1rem;
     right: 4rem;
@@ -592,12 +625,12 @@ footer .copy-footer img{
     padding-top: 3rem;
     font-size: 3rem;
 }
-.product-item .box-detalle .spanPrecio{
+.spanPrecio{
     text-decoration: line-through;
     color: gray;
     padding-right: 0.3rem;
 } 
-.product-item .box-detalle p:nth-child(5){
+.product-item .box-detalle .boxPrice{
     font-size: 3rem;
     font-weight: 100;
 }
@@ -652,9 +685,12 @@ footer .copy-footer img{
 }
 .box-detalle .agregar-carrito{
     position:absolute;
+    transition: transform .5s;
+    cursor: pointer;
 }
 .box-detalle .agregar-carrito:hover{
     background-color: #adbd99;
+    transform: scale(1.1);
 
 }
 .box-detalle button:hover a{
@@ -673,7 +709,7 @@ footer .copy-footer img{
 
 /* CONTACTO */
 .contacto{
-    padding: 8rem;
+    padding: 8rem 8rem 0 8rem ;
     width: 80%;
     margin: auto;
     display: grid;
@@ -1047,9 +1083,8 @@ input[type="submit"]:hover{
         display: inline;
     }
 
-    /* STORE */
-
 }
+   /* STORE */
 
 /* CARRITO DE COMPRAS */
 
@@ -1058,13 +1093,16 @@ main .section-cart{
     top: 168px;
     background-color: white;
     border: 2px solid #AFC2D5;
-    width: 250px;
-    height: 100vh;
-    right: -250px;
+    width: 400px;
+    height: 640px;
+    right: -400px;
     transition: right .5s ease-in;
+    overflow: scroll;
+    padding-left: 0.5rem;
 }
 main .activar{
     right: 0;
+    
 }
 main #removeCart{
     color: #8caaa8;
@@ -1076,4 +1114,136 @@ main #removeCart{
 }
 main .title-cart{
     margin-top: 1.5rem;
+    font-family: 'Spartan', sans-serif;
+}
+
+.listPurchase>#totalPriceBox{
+margin: 4rem;
+display: inline-block;
+}
+main #loQuiero{
+    background-color: #8caaa8;
+    width: 5rem;
+    height: 2rem;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    transition: all .5s ease;
+    outline: none;
+    cursor: pointer;
+    margin: .5rem;
+    margin-bottom: 1rem;
+}
+main #loQuiero:hover{
+    background-color:white;
+    color:#8caaa9;
+    border: 2px solid #8caaa9;
+}
+main .itemProductCart{
+    border-bottom: 1px solid #adbd99;
+    padding: 1rem 0;
+}
+main .removeProduct{
+    position: absolute;
+    right: .5rem;
+    border: none;
+    width:  1.2rem;
+    height:  1.2rem;
+    transition: all .5s ease;
+    
+}
+main .removeProduct:hover{
+    width: 1.5rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+main .productName{
+    margin-top: .5rem;
+    padding-bottom: .5rem;
+}
+main .productQuantity{
+    width: 10px;
+    border: none;
+    outline: none;
+    margin-left: 2rem;
+}
+main .priceProduct{
+    padding-left: 1rem;
+}
+main .productQuantity, .priceProduct, .xQuantity{
+    display: inline;
+}
+main .photoProduct{
+    width: 40%;
+}
+main #sectionBackLink{
+    padding-top: 1.4rem;
+    margin-left: 2rem;
+}
+main #sectionBackLink #backToShop{
+    color: #8caaa8;
+}
+main #sectionPurchase{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main #totalPrice{
+    display: inline;
+}
+.listPurchase, .buttomPurchase{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+.listPurchase{
+    margin-bottom:1rem;
+}
+
+.textModalCart{
+    text-align: center;
+    padding-top: 10rem;
+}
+.cart-empty{
+    width: 20%;
+    height: 20%;
+}
+.itemProductPurchase{
+    margin-top: 2rem;
+}
+.productNamePurchase{
+    display: inline;
+    
+}
+
+.buttomPurchase{
+    width: 5rem;
+    margin-top: 1rem;
+    padding: .3rem;
+    border-radius: 1.5rem;
+    border: 2px solid #A8CCC9;
+    color: #8caaa9;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+    transition: transform .4s;
+}
+.buttomPurchase:hover{
+    transform:scale(1.2) ;
+}
+.linkWsp{
+    color: #8caaa9;
+}
+.check{
+    border-radius: 5rem;
+    border: 3px solid #39b54a; 
+    width: 5rem;
+    padding: 1rem;
+    margin: 3rem;
+}
+.positionLinkBackToCart{
+    position: absolute;
+    top: 10rem;
+    left: 0;
 }
