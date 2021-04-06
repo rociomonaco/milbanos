@@ -4,7 +4,7 @@
 
 class Product{
     constructor(nombre, id, stock, imagenPrincipal, itemImagen1, itemImagen2, itemImagen3, itemImagen4,
-        descripcion, precio, cantidad){
+        descripcion, precio){
         if(nombre === "" || precio <= 0 || stock < 0){
             throw new Error('No es posible la creación del producto.');
         }
@@ -18,7 +18,6 @@ class Product{
         this.itemImagen4 = itemImagen4;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.cantidad = cantidad;
     }
 }
 
@@ -29,7 +28,6 @@ class Product{
         let cartLocalStorage = localStorage.getItem('cart');
         if(cartLocalStorage){
             let objectLocalStorage = JSON.parse(cartLocalStorage);
-            console.log(objectLocalStorage);
             cart = objectLocalStorage;
             cart.forEach(i =>{
             addProductCart(i);
@@ -44,7 +42,6 @@ class Product{
 ----------------------------------------------------*/
 function setProductsToCart(i){
     cart.push(i);
-    console.log(cart);
     localStorage.setItem('cart',JSON.stringify(cart));
 }
 
@@ -66,7 +63,7 @@ $(() => {
         let productsObject = datos;
         productsObject.forEach((value)=>{
             return new Product(value.nombre, value.id, value.stock, value.imagenPrincipal, value.itemImagen1, value.itemImagen2, value.itemImagen3, value.itemImagen4,
-            value.descripcion, value.precio, value.cantidad);
+            value.descripcion, value.precio);
         });
         return productsObject;   
     }

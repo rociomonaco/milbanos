@@ -1,42 +1,38 @@
+// validaciones formulario
 const d = document;
+let sendForm = d.getElementById('sendForm');
 conctactFormValidation();
+
+
 function conctactFormValidation(){
-    const form = d.querySelector(".contact-form");
     const inputs = d.querySelectorAll(".contact-form [required]");
     inputs.forEach(input =>{
         const span = d.createElement('span');
         span.id = input.name;
-        console.log(span.id);
         span.innerHTML = input.title;
         span.classList.add('contact-form-error','none');
         input.insertAdjacentElement('afterend',span);
     });
+
     d.addEventListener('keyup', e =>{
-        
+        // La delegacion de eventos ocurre cuando e.target coincida con el elemento que 
+        // se encuentre en contact-form y sea requerido
         if(e.target.matches('.contact-form [required]')){
             let input = e.target,
-            pattern = input.pattern || input.dataset.pattern;
+            pattern = input.pattern;
             if(pattern && input.value !== ''){
-                console.log(input.name)
-                console.log("input tiene patron");
                 let regex = new RegExp(pattern);
                 return !regex.exec(input.value)
                 ?d.getElementById(input.name).classList.add('is-active')
-                :d.getElementById(input.name).classList.remove('is-active');
+                :d.getElementById(input.name).classList.remove('is-active');  
             }
+            sendForm.addEventListener('click', ((e)=>{
+                e.preventDefault();
+                window.location.href ="./agradecimiento-contacto.html";
+            }));
         }
     });
-    
 }
 
-let sendForm = d.getElementById('sendForm');
-let inputs = d.getElementsByTagName('input');
-sendForm.addEventListener('click', ((e)=>{
-    if(inputs.value ){
-        e.preventDefault();
-        window.location.href ="./agradecimiento-contacto.html";
-    }
-
-}));
 
 
